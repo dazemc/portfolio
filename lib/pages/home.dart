@@ -1,18 +1,38 @@
 import 'package:jaspr/jaspr.dart';
 
-// import '../components/counter.dart';
-
-class Home extends StatelessComponent {
+class Home extends StatefulComponent {
   const Home({super.key});
+  @override
+  State createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  bool _isPrimary = true;
+
+  void toggleStyle() {
+    setState(() {
+      _isPrimary = !_isPrimary;
+    });
+  }
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    yield section([
-      // img(src: 'images/logo.svg', width: 80),
-      h1([text("Hello, I'm Daazed McFarland!")]),
-      // p([text("")]),
-      div(styles: Styles(height: 100.px), []),
-      // const Counter(), // Flutter embeded
-    ]);
+    yield div(
+      classes: "flex justify-center min-h-screen bg-base-100",
+      [
+        button(
+          onClick: toggleStyle,
+          classes: [
+            'btn',
+            'btn-soft',
+            _isPrimary ? 'btn-primary' : 'btn-secondary',
+          ].join(' '),
+          [
+            text(
+                _isPrimary ? "I'm a Primary button" : "I'm a Secondary button"),
+          ],
+        )
+      ],
+    );
   }
 }

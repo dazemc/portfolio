@@ -27,10 +27,5 @@ import 'package:portfolio/app.dart' as prefix2;
 /// ```
 final defaultJasprOptions = JasprOptions(
   clients: {prefix2.App: ClientTarget<prefix2.App>('app')},
-  styles:
-      () => [
-        ...prefix0.Header.styles,
-        ...prefix1.About.styles,
-        ...prefix2.AppState.styles,
-      ],
+  styles: () => [...prefix0.Header.styles, ...prefix1.About.styles],
 );

@@ -4,6 +4,7 @@ import 'package:jaspr_router/jaspr_router.dart';
 import 'components/header.dart';
 import 'pages/about.dart';
 import 'pages/home.dart';
+// import 'pages/example.dart';
 
 // The main component of your application.
 //
@@ -70,23 +71,23 @@ class AppState extends State<App> {
   //
   // By using the @css annotation, these will be rendered automatically to css inside the <head> of your page.
   // Must be a variable or getter of type [List<StyleRule>].
-  @css
-  static final styles = [
-    css('.main', [
-      // The '&' refers to the parent selector of a nested style rules.
-      css('&').styles(
-        display: Display.flex,
-        height: 100.vh,
-        flexDirection: FlexDirection.column,
-        flexWrap: FlexWrap.wrap,
-      ),
-      css('section').styles(
-        display: Display.flex,
-        flexDirection: FlexDirection.column,
-        justifyContent: JustifyContent.center,
-        alignItems: AlignItems.center,
-        flex: Flex(grow: 1),
-      ),
-    ]),
-  ];
+//   @css
+//   static final styles = [
+//     css('.main', [
+//       // The '&' refers to the parent selector of a nested style rules.
+//       css('&').styles(
+//         display: Display.flex,
+//         height: 100.vh,
+//         flexDirection: FlexDirection.column,
+//         flexWrap: FlexWrap.wrap,
+//       ),
+//       css('section').styles(
+//         display: Display.flex,
+//         flexDirection: FlexDirection.column,
+//         justifyContent: JustifyContent.center,
+//         alignItems: AlignItems.center,
+//         flex: Flex(grow: 1),
+//       ),
+//     ]),
+//   ];
 }

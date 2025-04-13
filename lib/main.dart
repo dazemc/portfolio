@@ -45,6 +45,7 @@ void main() {
     head: [
       // The generated flutter manifest and bootstrap script.
       link(rel: 'manifest', href: 'manifest.json'),
+      link(href: 'styles.css', rel: 'stylesheet'),
       script(src: "flutter_bootstrap.js", async: true, []),
     ],
     body: App(),
