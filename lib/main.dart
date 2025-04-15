@@ -7,9 +7,9 @@ void main() {
   Logger.root.level = Level.ALL;
   Logger.root.onRecord.listen((record) => print(
       '${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}'));
-  final log = Logger('main');
-  log.info('logging initialized');
-  // Initializes the server environment with the generated default options.
+  // final log = Logger('main');
+  // log.info('logging initialized');
+  // // Initializes the server environment with the generated default options.
   Jaspr.initializeApp(
     options: defaultJasprOptions,
   );
@@ -22,21 +22,21 @@ void main() {
     title: 'portfolio',
     styles: [
       // Special import rule to include to another css file.
-      css.import('https://fonts.googleapis.com/css?family=Roboto'),
+      // css.import('https://fonts.googleapis.com/css?family=Roboto'),
       // Each style rule takes a valid css selector and a set of styles.
       // Styles are defined using type-safe css bindings and can be freely chained and nested.
-      css('html, body').styles(
-        width: 100.percent,
-        minHeight: 100.vh,
-        padding: Padding.zero,
-        margin: Margin.zero,
-        fontFamily: const FontFamily.list(
-            [FontFamily('Roboto'), FontFamilies.sansSerif]),
-      ),
-      css('h1').styles(
-        margin: Margin.unset,
-        fontSize: 4.rem,
-      ),
+      // css('html, body').styles(
+      //   width: 100.percent,
+      //   minHeight: 100.vh,
+      //   padding: Padding.zero,
+      //   margin: Margin.zero,
+      //   fontFamily: const FontFamily.list(
+      //       [FontFamily('Roboto'), FontFamilies.sansSerif]),
+      // ),
+      // css('h1').styles(
+      //   margin: Margin.unset,
+      //   fontSize: 4.rem,
+      // ),
     ],
     head: [
       // The generated flutter manifest and bootstrap script.

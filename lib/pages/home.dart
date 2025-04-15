@@ -20,16 +20,38 @@ class _HomeState extends State<Home> {
     yield div(
       classes: "flex justify-center min-h-screen bg-base-100",
       [
-        button(
-          onClick: toggleStyle,
-          classes: [
-            'btn',
-            'btn-soft',
-            _isPrimary ? 'btn-primary' : 'btn-secondary',
-          ].join(' '),
+        // button(
+        //   onClick: toggleStyle,
+        //   classes: [
+        //     'btn',
+        //     'btn-soft',
+        //     _isPrimary ? 'btn-primary' : 'btn-secondary',
+        //   ].join(' '),
+        //   [
+        //     text(
+        //         _isPrimary ? "I'm a Primary button" : "I'm a Secondary button"),
+        //   ],
+        // )
+        div(
+          classes:
+              ['mockup-code', 'shadow-md', 'w-full', 'm-4', 'h-32'].join(' '),
           [
-            text(
-                _isPrimary ? "I'm a Primary button" : "I'm a Secondary button"),
+            pre(
+              attributes: {'data-prefix': r'$'},
+              [
+                code([text('sh greeting.sh')]),
+              ],
+            ),
+            pre(classes: ['text-warning'].join(' '), attributes: {
+              'data-prefix': '>'
+            }, [
+              code([text('running...')])
+            ]),
+            pre(classes: ['text-success'].join(' '), attributes: {
+              'data-prefix': '>'
+            }, [
+              code([text("Hello I'm Daazed McFarland")])
+            ])
           ],
         )
       ],

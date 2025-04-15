@@ -1,3 +1,4 @@
+import 'package:logging/logging.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_router/jaspr_router.dart';
 
@@ -22,17 +23,60 @@ class App extends StatefulComponent {
 }
 
 class AppState extends State<App> {
+  List<String> availableThemes = [
+    'light',
+    'dark',
+    'cupcake',
+    'bumblebee',
+    'emerald',
+    'corporate',
+    'synthwave',
+    'retro',
+    'cyberpunk',
+    'valentine',
+    'halloween',
+    'garden',
+    'forest',
+    'aqua',
+    'lofi',
+    'pastel',
+    'fantasy',
+    'wireframe',
+    'black',
+    'luxury',
+    'dracula',
+    'cmyk',
+    'autumn',
+    'business',
+    'acid',
+    'lemonade',
+    'night',
+    'coffee',
+    'winter',
+    'dim',
+    'nord',
+    'sunset',
+    'caramellatte',
+    'abyss',
+    'silk',
+  ];
+  String currentTheme = 'coffee';
+
   @override
   void initState() {
+    Logger.root.level = Level.ALL;
+    Logger.root.onRecord.listen((record) => print(
+        '${record.level.name}: ${record.time}: ${record.loggerName}: ${record.message}'));
+    final log = Logger('AppState');
     super.initState();
     // Run code depending on the rendering environment.
     if (kIsWeb) {
-      print("Hello client");
+      log.info("Hello client");
       // When using @client components there is no default `main()` function on the client where you would normally
       // run any client-side initialization logic. Instead you can put it here, considering this component is only
       // mounted once at the root of your client-side component tree.
     } else {
-      print("Hello server");
+      log.info("Hello server");
     }
   }
 
@@ -45,7 +89,8 @@ class AppState extends State<App> {
     // create and return a [List] here.
 
     // Renders a <div class="main"> html element with children.
-    yield div(classes: 'main', [
+    yield Document.html(attributes: {'data-theme': currentTheme});
+    yield div(classes: ['main'].join(' '), [
       Router(routes: [
         ShellRoute(
           builder: (context, state, child) => Fragment(children: [
