@@ -3,13 +3,32 @@ import 'package:jaspr_router/jaspr_router.dart';
 
 import '../constants/theme.dart';
 
+List<Component> themeListElements(List<String> themeList) {
+  List<Component> componentList = [];
+  for (String theme in themeList) {
+    componentList.add(li([
+      input(
+          attributes: {
+            'type': 'radio',
+            'name': 'theme-dropdown',
+            'aria-label': theme,
+            'value': theme,
+          },
+          classes:
+              'theme-controller w-full btn btn-sm btn-block btn-ghost justify-start',
+          [])
+    ]));
+  }
+  return componentList;
+}
+
 class Header extends StatelessComponent {
   const Header({super.key});
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
+    List<Component> themeComponents = themeListElements(availableThemes);
     var activePath = RouteState.of(context).location;
-
     yield header([
       nav(
           classes: [
@@ -39,6 +58,26 @@ class Header extends StatelessComponent {
                                   src: '/assets/icons/home.svg')),
                         ]),
                   ]),
+                  div(classes: ['dropdown'].join(' '), [
+                    div(
+                        attributes: {'tabindex': '0', 'role': 'button'},
+                        classes: ['btn m-1'].join(' '),
+                        [
+                          text('Theme'),
+                          img(
+                              classes:
+                                  'inline-block h-2 w-2 fill-current opacity-60',
+                              src: '/assets/icons/chevron.svg')
+                        ]),
+                    ul(
+                      attributes: {
+                        'tabindex': '0',
+                      },
+                      classes:
+                          'dropdown-content bg-base-300 rounded-box z-1 p-2 shadow-2xl max-h-60 overflow-y-auto',
+                      themeComponents,
+                    )
+                  ])
                 ]),
           ]),
     ]);
