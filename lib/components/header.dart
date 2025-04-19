@@ -1,10 +1,12 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_router/jaspr_router.dart';
-
 import 'package:logging/logging.dart';
+import 'dart:math';
+
 import '../constants/theme.dart';
 
-final log = Logger('AppState');
+final log = Logger('/components/header');
+final random = Random();
 
 class Header extends StatefulComponent {
   const Header({super.key});
@@ -15,7 +17,9 @@ class Header extends StatefulComponent {
 
 class _HeaderState extends State<Header> {
   List<Component> themeListElements(List<String> themeList) {
-    List<Component> componentList = [];
+    List<Component> componentList = [
+      randomTheme(themeList),
+    ];
     for (String theme in themeList) {
       componentList.add(li([
         input(
@@ -39,6 +43,31 @@ class _HeaderState extends State<Header> {
     return componentList;
   }
 
+  Component randomTheme(themeList) {
+    int randomIdx = random.nextInt(themeList.length);
+    String theme = themeList[randomIdx];
+    log.info('Random theme chosen: $theme');
+    return li([
+      input(
+          attributes: {
+            'type': 'radio',
+            'name': 'theme-dropdown',
+            'aria-label': 'random',
+            'value': currentTheme,
+          },
+          classes:
+              'theme-controller w-full btn btn-sm btn-block btn-ghost justify-start',
+          events: {
+            'click': (event) {
+              log.info('Theme changed: $theme');
+              changeThemeName(theme);
+              randomIdx;
+            },
+          },
+          [])
+    ]);
+  }
+
   void changeThemeName(String name) {
     setState(() {
       currentTheme = name;
@@ -49,7 +78,7 @@ class _HeaderState extends State<Header> {
   @override
   Iterable<Component> build(BuildContext context) sync* {
     List<Component> themeComponents = themeListElements(availableThemes);
-    var activePath = RouteState.of(context).location;
+    // var activePath = RouteState.of(context).location;
     yield header([
       nav(
           classes: [
