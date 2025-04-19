@@ -2,6 +2,7 @@ import 'package:logging/logging.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_router/jaspr_router.dart';
 
+import 'constants/theme.dart';
 import 'components/header.dart';
 import 'pages/about.dart';
 import 'pages/home.dart';
@@ -23,8 +24,6 @@ class App extends StatefulComponent {
 }
 
 class AppState extends State<App> {
-  String currentTheme = 'coffee';
-
   @override
   void initState() {
     Logger.root.level = Level.ALL;
@@ -52,7 +51,7 @@ class AppState extends State<App> {
     // create and return a [List] here.
 
     // Renders a <div class="main"> html element with children.
-    yield Document.html(attributes: {'data-theme': currentTheme});
+    yield Document.html(attributes: {'data-theme': defaultTheme});
     yield div(classes: ['main'].join(' '), [
       Router(routes: [
         ShellRoute(

@@ -1,30 +1,51 @@
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_router/jaspr_router.dart';
 
+import 'package:logging/logging.dart';
 import '../constants/theme.dart';
 
-List<Component> themeListElements(List<String> themeList) {
-  List<Component> componentList = [];
-  for (String theme in themeList) {
-    componentList.add(li([
-      input(
-          attributes: {
-            'type': 'radio',
-            'name': 'theme-dropdown',
-            'aria-label': theme,
-            'value': theme,
-          },
-          classes:
-              'theme-controller w-full btn btn-sm btn-block btn-ghost justify-start',
-          [])
-    ]));
-  }
-  return componentList;
-}
+final log = Logger('AppState');
 
-class Header extends StatelessComponent {
+class Header extends StatefulComponent {
   const Header({super.key});
 
+  @override
+  State createState() => _HeaderState();
+}
+
+class _HeaderState extends State<Header> {
+  List<Component> themeListElements(List<String> themeList) {
+    List<Component> componentList = [];
+    for (String theme in themeList) {
+      componentList.add(li([
+        input(
+            attributes: {
+              'type': 'radio',
+              'name': 'theme-dropdown',
+              'aria-label': theme,
+              'value': theme,
+            },
+            classes:
+                'theme-controller w-full btn btn-sm btn-block btn-ghost justify-start',
+            events: {
+              'click': (event) {
+                log.info('Theme changed');
+                changeThemeName(theme);
+              }
+            },
+            [])
+      ]));
+    }
+    return componentList;
+  }
+
+  void changeThemeName(String name) {
+    setState(() {
+      currentTheme = name;
+    });
+  }
+
+  String currentTheme = defaultTheme;
   @override
   Iterable<Component> build(BuildContext context) sync* {
     List<Component> themeComponents = themeListElements(availableThemes);
@@ -61,9 +82,9 @@ class Header extends StatelessComponent {
                   div(classes: ['dropdown'].join(' '), [
                     div(
                         attributes: {'tabindex': '0', 'role': 'button'},
-                        classes: ['btn m-1'].join(' '),
+                        classes: ['btn m-1 w-25'].join(' '),
                         [
-                          text('Theme'),
+                          text(currentTheme),
                           img(
                               classes:
                                   'inline-block h-2 w-2 fill-current opacity-60',
