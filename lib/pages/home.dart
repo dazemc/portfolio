@@ -30,11 +30,9 @@ class _HomeState extends State<Home> {
     super.initState();
     if (kIsWeb) {
       Future.delayed(const Duration(milliseconds: 1), () {
-        List<String> mockCodeClassesUpdate = mockCodeClasses;
-        mockCodeClassesUpdate[mockCodeClasses
-            .indexWhere((element) => element == "opacity-0")] = 'opacity-100';
         setState(() {
-          mockCodeClasses = mockCodeClassesUpdate;
+          mockCodeClasses[mockCodeClasses
+              .indexWhere((element) => element == "opacity-0")] = 'opacity-100';
         });
       });
     }
