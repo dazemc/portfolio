@@ -8,11 +8,36 @@ class Home extends StatefulComponent {
 
 class _HomeState extends State<Home> {
   bool _isPrimary = true;
-
+  List<String> mockCodeClasses = [
+    'mockup-code',
+    'shadow-md',
+    'w-full',
+    'm-4',
+    'h-32',
+    'transition',
+    'duration-300',
+    'ease-in-out',
+    'opacity-0',
+  ];
   void toggleStyle() {
     setState(() {
       _isPrimary = !_isPrimary;
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if (kIsWeb) {
+      Future.delayed(const Duration(milliseconds: 1), () {
+        List<String> mockCodeClassesUpdate = mockCodeClasses;
+        mockCodeClassesUpdate[mockCodeClasses
+            .indexWhere((element) => element == "opacity-0")] = 'opacity-100';
+        setState(() {
+          mockCodeClasses = mockCodeClassesUpdate;
+        });
+      });
+    }
   }
 
   @override
@@ -33,8 +58,7 @@ class _HomeState extends State<Home> {
         //   ],
         // )
         div(
-          classes:
-              ['mockup-code', 'shadow-md', 'w-full', 'm-4', 'h-32'].join(' '),
+          classes: mockCodeClasses.join(' '),
           [
             pre(
               attributes: {'data-prefix': r'$'},

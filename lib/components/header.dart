@@ -45,7 +45,7 @@ class _HeaderState extends State<Header> {
 
   Component randomTheme(themeList) {
     int randomIdx = random.nextInt(themeList.length);
-    String theme = themeList[randomIdx];
+    final String theme = themeList[randomIdx];
     log.info('Random theme chosen: $theme');
     return li([
       input(
@@ -61,7 +61,7 @@ class _HeaderState extends State<Header> {
             'click': (event) {
               log.info('Theme changed: $theme');
               changeThemeName(theme);
-              randomIdx;
+              randomIdx; // changes theme for the next click
             },
           },
           [])
