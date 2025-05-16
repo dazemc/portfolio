@@ -5,3 +5,8 @@
 @plugin "./daisyui-theme.js"{
   /* custom theme here */
 }
+
+@keyframes blink {
+  0%, 100% { border-color: transparent; }
+  50% { border-color: currentColor; }
+}

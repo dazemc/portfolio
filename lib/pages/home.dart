@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:jaspr/jaspr.dart';
 
 class Home extends StatefulComponent {
@@ -8,7 +10,21 @@ class Home extends StatefulComponent {
 
 class _HomeState extends State<Home> {
   bool _isPrimary = true;
-  String mockCodeOpacity = 'opacity-0';
+  String initialOpacity = 'opacity-0';
+
+  String mockCodeScript = 'sh greeting.sh';
+  String mockCodeRunning = '...';
+  String mockCodeGreeting = "Hello I'm Daazed McFarland!";
+  String mockCodeGreetingTyper = '';
+  String mockCodeScriptTyper = '';
+  String mockCodeRunningTyper = '';
+  String mockCodeScriptOpacity = 'opacity-100';
+  String mockCodeGreetingOpacity = 'opacity-0';
+  bool isMockCodeScriptDone = false;
+  bool isMockCodeRunningDone = false;
+  bool isMockCodeGreetingDone = false;
+  int typewriterIndex = 0;
+
   void toggleStyle() {
     setState(() {
       _isPrimary = !_isPrimary;
@@ -19,29 +35,77 @@ class _HomeState extends State<Home> {
   void initState() {
     super.initState();
     // if (kIsWeb) {
+    // some browsers won't update correctly without a small wait
     Future.delayed(const Duration(milliseconds: 1), () {
       setState(() {
-        mockCodeOpacity = 'opacity-100';
+        initialOpacity = 'opacity-100';
       });
     });
     // }
+    Timer(const Duration(seconds: 3), () {
+      Timer.periodic(const Duration(milliseconds: 100), (timer) {
+        if (typewriterIndex < mockCodeScript.length && !isMockCodeScriptDone) {
+          setState(() {
+            mockCodeScriptTyper =
+                mockCodeScript.substring(0, typewriterIndex + 1);
+            typewriterIndex++;
+          });
+        } else {
+          setState(() {
+            if (!isMockCodeScriptDone) {
+              typewriterIndex = 0;
+              isMockCodeScriptDone = true;
+              mockCodeScriptOpacity = 'opacity-0';
+            }
+          });
+        }
+        if (typewriterIndex < mockCodeRunning.length &&
+            !isMockCodeRunningDone &&
+            isMockCodeScriptDone) {
+          setState(() {
+            mockCodeRunningTyper =
+                mockCodeRunning.substring(0, typewriterIndex + 1);
+            typewriterIndex++;
+          });
+        } else {
+          if (!isMockCodeRunningDone && isMockCodeScriptDone) {
+            setState(() {
+              typewriterIndex = 0;
+              isMockCodeRunningDone = true;
+            });
+          }
+        }
+        if (typewriterIndex < mockCodeGreeting.length &&
+            isMockCodeRunningDone) {
+          setState(() {
+            mockCodeGreetingOpacity = 'opacity-100';
+            mockCodeGreetingTyper =
+                mockCodeGreeting.substring(0, typewriterIndex + 1);
+            typewriterIndex++;
+          });
+        } else {
+          // typewriterIndex = 0;
+          // timer.cancel();
+        }
+      });
+    });
   }
 
   List<String> get mockCodeClasses => [
         'mockup-code',
         'shadow-md',
-        'w-full',
         'm-4',
         'h-32',
         'duration-1000',
         'ease-in-out',
-        mockCodeOpacity,
+        initialOpacity,
       ];
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
     yield div(
-      classes: "flex justify-center min-h-screen bg-base-100 transition-all",
+      classes:
+          "flex flex-col justify-start container mx-auto px-2 min-h-screen bg-base-100 transition-all",
       [
         // button(
         //   onClick: toggleStyle,
@@ -61,24 +125,113 @@ class _HomeState extends State<Home> {
             pre(
               attributes: {'data-prefix': r'$'},
               [
-                code([text('sh greeting.sh')]),
+                code([
+                  span(
+                    [
+                      text(mockCodeScriptTyper),
+                      span(
+                        classes:
+                            'animate-[blink_0.75s_step-end_infinite] $mockCodeScriptOpacity',
+                        styles: Styles(
+                          border: Border.only(
+                            right: BorderSide(
+                              width: Unit.pixels(2),
+                              color: const Color.named('currentColor'),
+                            ),
+                          ),
+                        ),
+                        [],
+                      ),
+                    ],
+                  ),
+                ]),
               ],
             ),
-            pre(classes: ['text-warning'].join(' '), attributes: {
-              'data-prefix': '>'
-            }, [
-              code([text('running...')])
-            ]),
-            pre(classes: ['text-success'].join(' '), attributes: {
-              'data-prefix': '>'
-            }, [
-              code([
-                text(
-                    "Hello I'm Daazed McFarland and this is very much a WIP page.")
-              ])
-            ])
+            pre(
+                classes:
+                    'text-warning ${!isMockCodeScriptDone ? 'hidden' : ''}',
+                attributes: {
+                  'data-prefix': '>'
+                },
+                [
+                  code([
+                    span(
+                      [
+                        text('running$mockCodeRunning'),
+                        span(
+                          classes:
+                              // TODO: loop '...' for a few seconds
+                              'animate-[blink_0.75s_step-end_infinite] $mockCodeScriptOpacity',
+                          [],
+                        ),
+                      ],
+                    )
+                  ])
+                ]),
+            pre(
+                classes:
+                    'text-success ${!isMockCodeRunningDone ? 'hidden' : ''}',
+                attributes: {
+                  'data-prefix': '>'
+                },
+                [
+                  code([
+                    span(
+                      [
+                        text(mockCodeGreetingTyper),
+                        span(
+                          classes:
+                              'animate-[blink_0.75s_step-end_infinite] $mockCodeGreetingOpacity',
+                          styles: Styles(
+                            border: Border.only(
+                              right: BorderSide(
+                                width: Unit.pixels(2),
+                                color: const Color.named('currentColor'),
+                              ),
+                            ),
+                          ),
+                          [],
+                        ),
+                      ],
+                    )
+                  ])
+                ])
           ],
-        )
+        ),
+        div(
+            classes:
+                'px-12 divider divider-accent duration-4000 ease-in-out $initialOpacity',
+            [
+              div(classes: 'text-current', [
+                em([text('Projects')])
+              ])
+            ]),
+        div(classes: 'flex justify-center', [
+          div(
+              classes:
+                  'my-2 carousel rounded-sm w-100 duration-4000 ease-in-out $initialOpacity',
+              [
+                div(classes: 'carousel-item w-full', id: 'i1', [
+                  a(
+                    href: 'https://github.com/dazemc/ink_manager',
+                    target: Target.blank,
+                    [img(classes: 'w-full', src: '/assets/images/ink.jpeg')],
+                  )
+                ]),
+                div(classes: 'carousel-item w-full', id: 'i2', [
+                  a(
+                      href: '',
+                      target: Target.blank,
+                      [img(classes: '', src: '')]),
+                ])
+              ]),
+        ]),
+        div(
+            classes:
+                'flex justify-center gap-2 py-2 duration-4000 ease-in-out $initialOpacity',
+            [
+              a(classes: 'btn btn-xs ', href: '#i1', [text('REST API')])
+            ])
       ],
     );
   }
