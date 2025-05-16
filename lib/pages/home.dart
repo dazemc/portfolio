@@ -8,17 +8,7 @@ class Home extends StatefulComponent {
 
 class _HomeState extends State<Home> {
   bool _isPrimary = true;
-  List<String> mockCodeClasses = [
-    'mockup-code',
-    'shadow-md',
-    'w-full',
-    'm-4',
-    'h-32',
-    'transition',
-    'duration-300',
-    'ease-in-out',
-    'opacity-0',
-  ];
+  String mockCodeOpacity = 'opacity-0';
   void toggleStyle() {
     setState(() {
       _isPrimary = !_isPrimary;
@@ -28,20 +18,30 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    if (kIsWeb) {
-      Future.delayed(const Duration(milliseconds: 1), () {
-        setState(() {
-          mockCodeClasses[mockCodeClasses
-              .indexWhere((element) => element == "opacity-0")] = 'opacity-100';
-        });
+    // if (kIsWeb) {
+    Future.delayed(const Duration(milliseconds: 1), () {
+      setState(() {
+        mockCodeOpacity = 'opacity-100';
       });
-    }
+    });
+    // }
   }
+
+  List<String> get mockCodeClasses => [
+        'mockup-code',
+        'shadow-md',
+        'w-full',
+        'm-4',
+        'h-32',
+        'duration-1000',
+        'ease-in-out',
+        mockCodeOpacity,
+      ];
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
     yield div(
-      classes: "flex justify-center min-h-screen bg-base-100",
+      classes: "flex justify-center min-h-screen bg-base-100 transition-all",
       [
         // button(
         //   onClick: toggleStyle,
@@ -72,7 +72,10 @@ class _HomeState extends State<Home> {
             pre(classes: ['text-success'].join(' '), attributes: {
               'data-prefix': '>'
             }, [
-              code([text("Hello I'm Daazed McFarland")])
+              code([
+                text(
+                    "Hello I'm Daazed McFarland and this is very much a WIP page.")
+              ])
             ])
           ],
         )
