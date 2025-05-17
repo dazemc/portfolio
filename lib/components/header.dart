@@ -4,6 +4,7 @@ import 'package:logging/logging.dart';
 import 'dart:math';
 
 import '../constants/theme.dart';
+import './svg.dart';
 
 final log = Logger('/components/header');
 final random = Random();
@@ -101,24 +102,14 @@ class _HeaderState extends State<Header> {
                           // 'btn-ghost',
                         ].join(' '),
                         [
-                          Link(
-                              to: '/',
-                              child: img(
-                                  classes: ['btn', 'btn-ghost'].join(' '),
-                                  src: '/assets/icons/home.svg')),
+                          Link(to: '/', child: houseIcon()),
                         ]),
                   ]),
                   div(classes: ['dropdown'].join(' '), [
                     div(
                         attributes: {'tabindex': '0', 'role': 'button'},
                         classes: ['btn m-1 w-25'].join(' '),
-                        [
-                          text(currentTheme),
-                          img(
-                              classes:
-                                  'inline-block h-2 w-2 fill-current opacity-60',
-                              src: '/assets/icons/chevron.svg')
-                        ]),
+                        [text(currentTheme), chevronIcon()]),
                     ul(
                       attributes: {
                         'tabindex': '0',
