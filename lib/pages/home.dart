@@ -3,12 +3,15 @@ import 'dart:async';
 import 'package:jaspr/jaspr.dart';
 
 class Home extends StatefulComponent {
-  const Home({super.key});
+  final String selectedItemId;
+
+  const Home({super.key, required this.selectedItemId});
   @override
   State createState() => _HomeState();
 }
 
 class _HomeState extends State<Home> {
+  late String currentId;
   bool _isPrimary = true;
   String initialOpacity = 'opacity-0';
 
@@ -34,6 +37,8 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
+    currentId = component.selectedItemId;
+
     // if (kIsWeb) {
     // some browsers won't update correctly without a small wait
     Future.delayed(const Duration(milliseconds: 1), () {
@@ -89,6 +94,17 @@ class _HomeState extends State<Home> {
         }
       });
     });
+  }
+
+  @override
+  void didUpdateComponent(covariant Home oldComponent) {
+    super.didUpdateComponent(oldComponent);
+
+    if (component.selectedItemId != oldComponent.selectedItemId) {
+      setState(() {
+        currentId = component.selectedItemId;
+      });
+    }
   }
 
   List<String> get mockCodeClasses => [
@@ -198,6 +214,7 @@ class _HomeState extends State<Home> {
                 ])
           ],
         ),
+
         div(
             classes:
                 'px-12 divider divider-accent duration-4000 ease-in-out $initialOpacity',
@@ -206,32 +223,59 @@ class _HomeState extends State<Home> {
                 em([text('Projects')])
               ])
             ]),
-        div(classes: 'flex justify-center', [
-          div(
-              classes:
-                  'my-2 carousel rounded-sm w-100 duration-4000 ease-in-out $initialOpacity',
-              [
-                div(classes: 'carousel-item w-full', id: 'i1', [
-                  a(
-                    href: 'https://github.com/dazemc/ink_manager',
-                    target: Target.blank,
-                    [img(classes: 'w-full', src: '/assets/images/ink.jpeg')],
-                  )
-                ]),
-                div(classes: 'carousel-item w-full', id: 'i2', [
-                  a(
-                      href: '',
-                      target: Target.blank,
-                      [img(classes: '', src: '')]),
-                ])
-              ]),
-        ]),
         div(
             classes:
                 'flex justify-center gap-2 py-2 duration-4000 ease-in-out $initialOpacity',
             [
-              a(classes: 'btn btn-xs ', href: '#i1', [text('REST API')])
-            ])
+              a(
+                  classes:
+                      'btn btn-xs ${currentId == 'i1' ? 'animate-bounce' : 'opacity-50'}',
+                  href: '#i1',
+                  [text('REST API')]),
+              a(
+                  classes:
+                      'btn btn-xs ${currentId == 'i2' ? 'animate-bounce' : 'opacity-50'}',
+                  href: '#i2',
+                  [text('FUTTER APP')])
+            ]),
+        div(classes: 'flex justify-center', [
+          div(
+              classes:
+                  'my-2 carousel overflow-y-auto overflow-x-hidden touch-pan-y rounded-sm w-100 duration-4000 ease-in-out $initialOpacity',
+              [
+                div(classes: 'carousel-item w-full', id: 'i1', [
+                  div(
+                    classes: 'card',
+                    [
+                      img(classes: 'w-full', src: '/assets/images/ink.jpeg'),
+                      div(classes: 'card-body', [
+                        h2(classes: 'card-title text-neutral-400', [
+                          a(href: 'https://github.com/dazemc/ink_manager', [
+                            u([
+                              text('ink_manager'),
+                            ]),
+                          ])
+                        ]),
+                        p([
+                          text(
+                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, sapien at volutpat viverra, nibh lacus sagittis libero, a ultricies justo mi in risus. Praesent eget facilisis nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.')
+                        ])
+                      ])
+                    ],
+                  )
+                ]),
+                div(classes: 'carousel-item w-full', id: 'i2', [
+                  a(
+                      href: 'https://github.com/dazemc/pi7600',
+                      target: Target.blank,
+                      [
+                        img(
+                            classes: 'w-full',
+                            src: '/assets/images/pi7600.jpeg')
+                      ]),
+                ])
+              ]),
+        ]),
       ],
     );
   }

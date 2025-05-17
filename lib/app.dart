@@ -1,7 +1,8 @@
+import 'dart:ui';
+
 import 'package:logging/logging.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_router/jaspr_router.dart';
-
 import 'constants/theme.dart';
 import 'components/header.dart';
 import 'pages/about.dart';
@@ -52,7 +53,7 @@ class AppState extends State<App> {
 
     // Renders a <div class="main"> html element with children.
     yield Document.html(attributes: {'data-theme': defaultTheme});
-    yield div(classes: ['main'].join(' '), [
+    yield div(classes: 'main', [
       Router(routes: [
         ShellRoute(
           builder: (context, state, child) => Fragment(children: [
@@ -63,7 +64,14 @@ class AppState extends State<App> {
             Route(
                 path: '/',
                 title: 'Home',
-                builder: (context, state) => const Home()),
+                builder: (context, state) {
+                  final selectedItemId =
+                      kIsWeb && state.location.substring(1).isNotEmpty
+                          ? state.location.substring(2)
+                          : 'i1';
+                  print(selectedItemId);
+                  return Home(selectedItemId: selectedItemId);
+                }),
             Route(
                 path: '/about',
                 title: 'About',
