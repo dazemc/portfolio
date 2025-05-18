@@ -57,7 +57,7 @@ class _HeaderState extends State<Header> {
             'value': currentTheme,
           },
           classes:
-              'theme-controller w-full btn btn-sm btn-block btn-ghost justify-start',
+              'theme-controller w-full btn btn-sm btn-block btn-primary justify-start animate-bounce',
           events: {
             'click': (event) {
               log.info('Theme changed: $theme');
@@ -75,52 +75,66 @@ class _HeaderState extends State<Header> {
     });
   }
 
+  bool isPathRoot(String path) {
+    if (path.isEmpty) {
+      return false;
+    } else {
+      if (path.length > 1) {
+        if ('#' == path[1]) {
+          return true;
+        } else {
+          return false;
+        }
+      } else {
+        return true;
+      }
+    }
+  }
+
   String currentTheme = defaultTheme;
   @override
   Iterable<Component> build(BuildContext context) sync* {
     List<Component> themeComponents = themeListElements(availableThemes);
-    // var activePath = RouteState.of(context).location;
+    var activePath = RouteState.of(context).location;
+    bool isRoot = isPathRoot(activePath);
+    print('active path: $activePath');
     yield header([
-      nav(
-          classes: [
-            'm-4',
-          ].join(' '),
-          [
-            // for (var route in [
-            //   (label: 'Home', path: '/'),
-            //   (label: 'About', path: '/about'),
-            // ])
-            div(
-                classes: ['navbar', 'bg-neutral', 'shadow-sm', 'rounded-box']
-                    .join(' '),
-                [
-                  div(classes: ['flex-1'].join(' '), [
-                    ul(
-                        classes: [
-                          // activePath == route.path ? 'active' : null,
-                          // 'btn',
-                          // 'btn-ghost',
-                        ].join(' '),
-                        [
-                          Link(to: '/', child: houseIcon()),
-                        ]),
-                  ]),
-                  div(classes: ['dropdown'].join(' '), [
-                    div(
-                        attributes: {'tabindex': '0', 'role': 'button'},
-                        classes: ['btn m-1 w-25'].join(' '),
-                        [text(currentTheme), chevronIcon()]),
-                    ul(
-                      attributes: {
-                        'tabindex': '0',
-                      },
-                      classes:
-                          'dropdown-content bg-base-300 rounded-box z-1 p-2 shadow-2xl max-h-60 overflow-y-auto',
-                      themeComponents,
-                    )
-                  ])
-                ]),
+      nav(classes: 'm-4', [
+        div(classes: 'navbar bg-neutral shadow-sm rounded-box', [
+          div(classes: 'flex flex-row flex-1', [
+            ul([
+              Link(
+                  classes:
+                      'btn btn-sm btn-primary ${isRoot ? 'btn-active animate-pulse' : 'btn-dash'}',
+                  to: '/',
+                  child: houseIcon()),
+            ]),
+            ul([
+              div([
+                Link(
+                    classes:
+                        'mx-1 btn btn-sm btn-primary ${!isRoot ? 'animate-pulse' : 'btn-dash'}',
+                    to: '/about',
+                    child: meIcon())
+              ]),
+            ]),
           ]),
+          div(classes: 'dropdown', [
+            div(
+                attributes: {'tabindex': '0', 'role': 'button'},
+                classes: 'btn m-1 w-25 hover:opacity-50',
+                [text(currentTheme), chevronIcon()]),
+            ul(
+              attributes: {
+                'tabindex': '0',
+              },
+              classes:
+                  'dropdown-content bg-base-300 rounded-box z-1 p-2 shadow-2xl max-h-60 overflow-y-auto',
+              themeComponents,
+            )
+          ])
+        ]),
+      ]),
     ]);
   }
 

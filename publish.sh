@@ -1,5 +1,29 @@
 #!/bin/bash
-jaspr clean && jaspr build
+
+wasm=false
+
+if [ $# -eq 0 ]; then
+    jaspr clean
+    jaspr build
+else
+    while [ "$1" != "" ]; do
+        case $1 in
+            --wasm)
+                wasm=true
+                ;;
+            *)
+                echo "Use --wasm for experimental-wasm build"
+                exit 1
+                ;;
+        esac
+        shift
+    done
+
+    jaspr clean
+    if [ "$wasm" = true ]; then
+        jaspr build --experimental-wasm
+    fi
+fi
 rm -rf /var/www/daazed.dev/*
 cp -r ./build/jaspr/* /var/www/daazed.dev/
-cp -r ./assets/* /var/www/daazed.dev/assets/
+

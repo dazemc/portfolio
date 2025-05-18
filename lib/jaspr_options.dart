@@ -5,8 +5,7 @@
 // Generated with jaspr_builder
 
 import 'package:jaspr/jaspr.dart';
-import 'package:portfolio/pages/about.dart' as prefix0;
-import 'package:portfolio/app.dart' as prefix1;
+import 'package:portfolio/app.dart' as prefix0;
 
 /// Default [JasprOptions] for use with your jaspr project.
 ///
@@ -25,6 +24,6 @@ import 'package:portfolio/app.dart' as prefix1;
 /// }
 /// ```
 final defaultJasprOptions = JasprOptions(
-  clients: {prefix1.App: ClientTarget<prefix1.App>('app')},
-  styles: () => [...prefix0.About.styles],
+  clients: {prefix0.App: ClientTarget<prefix0.App>('app')},
+  styles: () => [],
 );

@@ -1,12 +1,61 @@
 @import "tailwindcss";
-@plugin "./daisyui.js" {themes: all}
-
-/* Optional for custom themes – Docs: https://daisyui.com/docs/themes/#how-to-add-a-new-custom-theme */
-@plugin "./daisyui-theme.js"{
-  /* custom theme here */
+@plugin "./daisyui.js" {
+  themes: all;
 }
 
-@keyframes blink {
-  0%, 100% { border-color: transparent; }
-  50% { border-color: currentColor; }
+/* Optional for custom themes – Docs: https://daisyui.com/docs/themes/#how-to-add-a-new-custom-theme */
+@plugin "./daisyui-theme.js" {
+  /* custom theme here */
+}
+@theme {
+  --animate-blink: blink 0.75s step-end infinite;
+  @keyframes blink {
+    0%,
+    100% {
+      border-color: transparent;
+    }
+    50% {
+      border-color: currentColor;
+    }
+  }
+}
+@theme {
+  --animate-wiggle: wiggle 1s ease-in-out infinite;
+  --animate-wiggle-once: wiggle 1s ease-in-out 3;
+  @keyframes wiggle {
+    0%,
+    100% {
+      transform: rotate(-5deg);
+    }
+    50% {
+      transform: rotate(5deg);
+    }
+  }
+}
+@theme {
+  --animate-spin-once: spin 3s ease-in-out 1;
+  @keyframes spin {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}
+@theme {
+  --animate-fall: fall 3s ease-in-out 1;
+  @keyframes fall {
+    0% {
+      transform: translateY(-15px);
+    }
+  }
+}
+@theme {
+  --animate-stretch: stretch 3s ease-in-out 1;
+  @keyframes stretch {
+    0% {
+      transform: scale(2);
+    }
+    100% {
+      transform: scaleX(1);
+    }
+  }
 }

@@ -14,6 +14,7 @@ class _HomeState extends State<Home> {
   late String currentId;
   bool _isPrimary = true;
   String initialOpacity = 'opacity-0';
+  String bounceOnce = '';
 
   String mockCodeScript = 'sh greeting.sh';
   String mockCodeRunning = '...';
@@ -123,18 +124,6 @@ class _HomeState extends State<Home> {
       classes:
           "flex flex-col justify-start container mx-auto px-2 min-h-screen bg-base-100 transition-all",
       [
-        // button(
-        //   onClick: toggleStyle,
-        //   classes: [
-        //     'btn',
-        //     'btn-soft',
-        //     _isPrimary ? 'btn-primary' : 'btn-secondary',
-        //   ].join(' '),
-        //   [
-        //     text(
-        //         _isPrimary ? "I'm a Primary button" : "I'm a Secondary button"),
-        //   ],
-        // )
         div(
           classes: mockCodeClasses.join(' '),
           [
@@ -146,8 +135,7 @@ class _HomeState extends State<Home> {
                     [
                       text(mockCodeScriptTyper),
                       span(
-                        classes:
-                            'animate-[blink_0.75s_step-end_infinite] $mockCodeScriptOpacity',
+                        classes: 'animate-blink $mockCodeScriptOpacity',
                         styles: Styles(
                           border: Border.only(
                             right: BorderSide(
@@ -177,7 +165,7 @@ class _HomeState extends State<Home> {
                         span(
                           classes:
                               // TODO: loop '...' for a few seconds
-                              'animate-[blink_0.75s_step-end_infinite] $mockCodeScriptOpacity',
+                              'animate-blink $mockCodeScriptOpacity',
                           [],
                         ),
                       ],
@@ -196,8 +184,7 @@ class _HomeState extends State<Home> {
                       [
                         text(mockCodeGreetingTyper),
                         span(
-                          classes:
-                              'animate-[blink_0.75s_step-end_infinite] $mockCodeGreetingOpacity',
+                          classes: 'animate-blink $mockCodeGreetingOpacity',
                           styles: Styles(
                             border: Border.only(
                               right: BorderSide(
@@ -214,12 +201,11 @@ class _HomeState extends State<Home> {
                 ])
           ],
         ),
-
         div(
             classes:
-                'px-12 divider divider-accent duration-4000 ease-in-out $initialOpacity',
+                'px-12 divider divider-accent duration-4000 ease-in-out animate-stretch $initialOpacity',
             [
-              div(classes: 'text-current', [
+              div(classes: 'text-current animate-fall', [
                 em([text('Projects')])
               ])
             ]),
@@ -236,7 +222,7 @@ class _HomeState extends State<Home> {
                   classes:
                       'btn btn-xs ${currentId == 'i2' ? 'animate-bounce' : 'opacity-50'}',
                   href: '#i2',
-                  [text('FUTTER APP')])
+                  [text('FLUTTER APP')])
             ]),
         div(classes: 'flex justify-center', [
           div(
@@ -249,16 +235,50 @@ class _HomeState extends State<Home> {
                     [
                       img(classes: 'w-full', src: '/assets/images/ink.jpeg'),
                       div(classes: 'card-body', [
-                        h2(classes: 'card-title text-neutral-400', [
+                        h2(classes: 'card-title text-neutral-400 justify-end', [
                           a(href: 'https://github.com/dazemc/ink_manager', [
                             u([
-                              text('ink_manager'),
+                              text('RESTful API for E-Paper device'),
                             ]),
                           ])
                         ]),
-                        p([
+                        p(classes: 'justify-start', [
                           text(
-                              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, sapien at volutpat viverra, nibh lacus sagittis libero, a ultricies justo mi in risus. Praesent eget facilisis nulla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.')
+                              'Developed a Python-based project using FastAPI to manage an E-Paper device, including a '),
+                          a(
+                              href: 'https://github.com/dazemc/e-paper-lib',
+                              target: Target.blank,
+                              [
+                                div(
+                                    classes: 'btn btn-dash btn-primary btn-xs',
+                                    [
+                                      text('custom library'),
+                                    ])
+                              ]),
+                          text(' '),
+                          a(
+                              href: 'https://github.com/dazemc/ink_manager',
+                              target: Target.blank,
+                              [
+                                div(
+                                    classes: 'btn btn-dash btn-primary btn-xs',
+                                    [
+                                      text('API'),
+                                    ])
+                              ]),
+                          text(' and a '),
+                          a(
+                              classes: 'text-',
+                              href: 'https://github.com/dazemc/ink_app',
+                              target: Target.blank,
+                              [
+                                div(
+                                    classes: 'btn btn-dash btn-primary btn-xs',
+                                    [
+                                      text('Flutter application'),
+                                    ])
+                              ]),
+                          text(' front-end')
                         ])
                       ])
                     ],
