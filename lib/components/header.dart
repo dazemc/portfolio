@@ -3,6 +3,7 @@ import 'package:jaspr_router/jaspr_router.dart';
 import 'package:logging/logging.dart';
 import 'dart:math';
 
+import 'package:jaspr_lucide/jaspr_lucide.dart' as lucide;
 import '../constants/theme.dart';
 import './svg.dart';
 
@@ -105,9 +106,12 @@ class _HeaderState extends State<Header> {
             ul([
               Link(
                   classes:
-                      'btn btn-sm btn-primary ${isRoot ? 'btn-active animate-pulse' : 'btn-dash'}',
+                      'mx-1 btn btn-sm btn-primary ${isRoot ? 'btn-active animate-pulse' : 'btn-dash'}',
                   to: '/',
-                  child: houseIcon()),
+                  child: lucide.house(
+                      height: Unit.pixels(30),
+                      width: Unit.pixels(30),
+                      [text('test')])),
             ]),
             ul([
               div([
@@ -115,7 +119,8 @@ class _HeaderState extends State<Header> {
                     classes:
                         'mx-1 btn btn-sm btn-primary ${!isRoot ? 'animate-pulse' : 'btn-dash'}',
                     to: '/about',
-                    child: meIcon())
+                    child: lucide.info(
+                        height: Unit.pixels(30), width: Unit.pixels(30), []))
               ]),
             ]),
           ]),

@@ -40,61 +40,62 @@ class _HomeState extends State<Home> {
     super.initState();
     currentId = component.selectedItemId;
 
-    // if (kIsWeb) {
-    // some browsers won't update correctly without a small wait
-    Future.delayed(const Duration(milliseconds: 1), () {
-      setState(() {
-        initialOpacity = 'opacity-100';
+    if (kIsWeb) {
+      // some browsers won't update correctly without a small wait
+      Future.delayed(const Duration(milliseconds: 1), () {
+        setState(() {
+          initialOpacity = 'opacity-100';
+        });
       });
-    });
-    // }
-    Timer(const Duration(seconds: 3), () {
-      Timer.periodic(const Duration(milliseconds: 100), (timer) {
-        if (typewriterIndex < mockCodeScript.length && !isMockCodeScriptDone) {
-          setState(() {
-            mockCodeScriptTyper =
-                mockCodeScript.substring(0, typewriterIndex + 1);
-            typewriterIndex++;
-          });
-        } else {
-          setState(() {
-            if (!isMockCodeScriptDone) {
-              typewriterIndex = 0;
-              isMockCodeScriptDone = true;
-              mockCodeScriptOpacity = 'opacity-0';
-            }
-          });
-        }
-        if (typewriterIndex < mockCodeRunning.length &&
-            !isMockCodeRunningDone &&
-            isMockCodeScriptDone) {
-          setState(() {
-            mockCodeRunningTyper =
-                mockCodeRunning.substring(0, typewriterIndex + 1);
-            typewriterIndex++;
-          });
-        } else {
-          if (!isMockCodeRunningDone && isMockCodeScriptDone) {
+      Timer(const Duration(seconds: 3), () {
+        Timer.periodic(const Duration(milliseconds: 100), (timer) {
+          if (typewriterIndex < mockCodeScript.length &&
+              !isMockCodeScriptDone) {
             setState(() {
-              typewriterIndex = 0;
-              isMockCodeRunningDone = true;
+              mockCodeScriptTyper =
+                  mockCodeScript.substring(0, typewriterIndex + 1);
+              typewriterIndex++;
+            });
+          } else {
+            setState(() {
+              if (!isMockCodeScriptDone) {
+                typewriterIndex = 0;
+                isMockCodeScriptDone = true;
+                mockCodeScriptOpacity = 'opacity-0';
+              }
             });
           }
-        }
-        if (typewriterIndex < mockCodeGreeting.length &&
-            isMockCodeRunningDone) {
-          setState(() {
-            mockCodeGreetingOpacity = 'opacity-100';
-            mockCodeGreetingTyper =
-                mockCodeGreeting.substring(0, typewriterIndex + 1);
-            typewriterIndex++;
-          });
-        } else {
-          // typewriterIndex = 0;
-          // timer.cancel();
-        }
+          if (typewriterIndex < mockCodeRunning.length &&
+              !isMockCodeRunningDone &&
+              isMockCodeScriptDone) {
+            setState(() {
+              mockCodeRunningTyper =
+                  mockCodeRunning.substring(0, typewriterIndex + 1);
+              typewriterIndex++;
+            });
+          } else {
+            if (!isMockCodeRunningDone && isMockCodeScriptDone) {
+              setState(() {
+                typewriterIndex = 0;
+                isMockCodeRunningDone = true;
+              });
+            }
+          }
+          if (typewriterIndex < mockCodeGreeting.length &&
+              isMockCodeRunningDone) {
+            setState(() {
+              mockCodeGreetingOpacity = 'opacity-100';
+              mockCodeGreetingTyper =
+                  mockCodeGreeting.substring(0, typewriterIndex + 1);
+              typewriterIndex++;
+            });
+          } else {
+            // typewriterIndex = 0;
+            // timer.cancel();
+          }
+        });
       });
-    });
+    }
   }
 
   @override
