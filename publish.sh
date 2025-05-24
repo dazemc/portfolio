@@ -25,5 +25,5 @@ else
     fi
 fi
 rm -rf /var/www/daazed.dev/*
-cp -r ./build/jaspr/* /var/www/daazed.dev/
+cp -al ./build/jaspr/* /var/www/daazed.dev/
 
