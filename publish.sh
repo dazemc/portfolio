@@ -1,6 +1,7 @@
 #!/bin/bash
-
 wasm=false
+
+sudo systemctl stop nginx
 
 if [ $# -eq 0 ]; then
     jaspr clean
@@ -24,6 +25,7 @@ else
         jaspr build --experimental-wasm
     fi
 fi
+
 rm -rf /var/www/daazed.dev/*
 cp -al ./build/jaspr/* /var/www/daazed.dev/
 
