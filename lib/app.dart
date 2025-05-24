@@ -1,7 +1,6 @@
 import 'package:logging/logging.dart';
 import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_router/jaspr_router.dart';
-import 'constants/theme.dart';
 import 'components/header.dart';
 import 'pages/about.dart';
 import 'pages/home.dart';
