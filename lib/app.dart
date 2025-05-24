@@ -50,7 +50,6 @@ class AppState extends State<App> {
     // create and return a [List] here.
 
     // Renders a <div class="main"> html element with children.
-    yield Document.html(attributes: {'data-theme': defaultTheme});
     yield div(classes: 'main', [
       Router(routes: [
         ShellRoute(

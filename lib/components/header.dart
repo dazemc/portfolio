@@ -5,7 +5,7 @@ import 'dart:math';
 
 import 'package:jaspr_lucide/jaspr_lucide.dart' as lucide;
 import '../constants/theme.dart';
-import './svg.dart';
+import 'theme_controller.dart';
 
 final log = Logger('/components/header');
 final random = Random();
@@ -18,64 +18,6 @@ class Header extends StatefulComponent {
 }
 
 class _HeaderState extends State<Header> {
-  List<Component> themeListElements(List<String> themeList) {
-    List<Component> componentList = [
-      randomTheme(themeList),
-    ];
-    for (String theme in themeList) {
-      componentList.add(li([
-        input(
-            attributes: {
-              'type': 'radio',
-              'name': 'theme-dropdown',
-              'aria-label': theme,
-              'value': theme,
-            },
-            classes:
-                'theme-controller w-full btn btn-sm btn-block btn-ghost justify-start',
-            events: {
-              'click': (event) {
-                log.info('Theme changed');
-                changeThemeName(theme);
-              }
-            },
-            [])
-      ]));
-    }
-    return componentList;
-  }
-
-  Component randomTheme(themeList) {
-    int randomIdx = random.nextInt(themeList.length);
-    final String theme = themeList[randomIdx];
-    log.info('Random theme chosen: $theme');
-    return li([
-      input(
-          attributes: {
-            'type': 'radio',
-            'name': 'theme-dropdown',
-            'aria-label': 'random',
-            'value': currentTheme,
-          },
-          classes:
-              'theme-controller w-full btn btn-sm btn-block btn-primary justify-start animate-bounce',
-          events: {
-            'click': (event) {
-              log.info('Theme changed: $theme');
-              changeThemeName(theme);
-              randomIdx; // changes theme for the next click
-            },
-          },
-          [])
-    ]);
-  }
-
-  void changeThemeName(String name) {
-    setState(() {
-      currentTheme = name;
-    });
-  }
-
   bool isPathRoot(String path) {
     if (path.isEmpty) {
       return false;
@@ -92,10 +34,8 @@ class _HeaderState extends State<Header> {
     }
   }
 
-  String currentTheme = defaultTheme;
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    List<Component> themeComponents = themeListElements(availableThemes);
     var activePath = RouteState.of(context).location;
     bool isRoot = isPathRoot(activePath);
     print('active path: $activePath');
@@ -105,13 +45,14 @@ class _HeaderState extends State<Header> {
           div(classes: 'flex flex-row flex-1', [
             ul([
               Link(
-                  classes:
-                      'mx-1 btn btn-sm btn-primary ${isRoot ? 'btn-active animate-pulse' : 'btn-dash'}',
-                  to: '/',
-                  child: lucide.house(
-                      height: Unit.pixels(30),
-                      width: Unit.pixels(30),
-                      [text('test')])),
+                classes:
+                    'mx-1 btn btn-sm btn-primary ${isRoot ? 'btn-active animate-pulse' : 'btn-dash'}',
+                to: '/',
+                child: lucide.House(
+                  height: Unit.pixels(30),
+                  width: Unit.pixels(30),
+                ),
+              ),
             ]),
             ul([
               div([
@@ -119,25 +60,17 @@ class _HeaderState extends State<Header> {
                     classes:
                         'mx-1 btn btn-sm btn-primary ${!isRoot ? 'animate-pulse' : 'btn-dash'}',
                     to: '/about',
-                    child: lucide.info(
-                        height: Unit.pixels(30), width: Unit.pixels(30), []))
+                    child: lucide.Info(
+                        height: Unit.pixels(30), width: Unit.pixels(30)))
               ]),
             ]),
           ]),
-          div(classes: 'dropdown', [
-            div(
-                attributes: {'tabindex': '0', 'role': 'button'},
-                classes: 'btn m-1 w-25 hover:opacity-50',
-                [text(currentTheme), chevronIcon()]),
-            ul(
-              attributes: {
-                'tabindex': '0',
-              },
-              classes:
-                  'dropdown-content bg-base-300 rounded-box z-1 p-2 shadow-2xl max-h-60 overflow-y-auto',
-              themeComponents,
-            )
-          ])
+          ThemeController(
+            themeName: defaultTheme,
+            dropdownIcon: lucide.ChevronDown(classes: 'animate-wiggle'),
+            randomThemeClasses:
+                'w-full btn btn-sm btn-block btn-ghost justify-start',
+          )
         ]),
       ]),
     ]);
