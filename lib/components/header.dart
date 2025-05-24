@@ -69,7 +69,7 @@ class _HeaderState extends State<Header> {
             themeName: defaultTheme,
             dropdownIcon: lucide.ChevronDown(classes: 'animate-wiggle'),
             randomThemeClasses:
-                'w-full btn btn-sm btn-block btn-ghost justify-start',
+                'w-full btn btn-sm btn-block btn-ghost justify-start animate-bounce',
           )
         ]),
       ]),
