@@ -1,6 +1,7 @@
 import 'dart:async';
 
-import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/jaspr.dart' hide button;
+import 'package:portfolio/components/button.dart';
 import 'package:portfolio/components/card.dart';
 import 'package:portfolio/components/card_body.dart';
 import 'package:portfolio/components/card_title.dart';
@@ -8,6 +9,7 @@ import 'package:portfolio/components/carousel.dart';
 import 'package:portfolio/components/carousel_item.dart';
 import 'package:portfolio/components/divider.dart';
 import 'package:portfolio/components/mockup_code.dart';
+import 'package:portfolio/components/button.dart';
 
 class Home extends StatefulComponent {
   final String selectedItemId;
@@ -216,15 +218,20 @@ class _HomeState extends State<Home> {
                 'flex justify-center gap-2 py-2 duration-4000 ease-in-out $initialOpacity',
             [
               a(
-                  classes:
-                      'btn btn-xs ${currentId == 'i1' ? 'animate-bounce' : 'opacity-50'}',
-                  href: '#i1',
-                  [text('REST API')]),
+                classes:
+                    '${currentId == 'i1' ? 'animate-bounce' : 'opacity-50'}',
+                [
+                  button(size: ButtonSize.xs, [text('REST API')])
+                ],
+                href: '#i1',
+              ),
               a(
                   classes:
-                      'btn btn-xs ${currentId == 'i2' ? 'animate-bounce' : 'opacity-50'}',
+                      '${currentId == 'i2' ? 'animate-bounce' : 'opacity-50'}',
                   href: '#i2',
-                  [text('FLUTTER APP')])
+                  [
+                    button(size: ButtonSize.xs, [text('FLUTTER APP')])
+                  ])
             ]),
         div(classes: 'flex justify-center', [
           Carousel(

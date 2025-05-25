@@ -60,12 +60,10 @@ Component Divider(
   }
 
   String getClasses() {
-    String _classes = nullCheckDefaults(classes, 'divider');
-    _classes += getDirection();
-    _classes += getPlacement();
-    _classes += getColor();
+    String output = nullCheckDefaults(classes, 'divider');
+    output += getDirection() + getPlacement() + getColor();
 
-    return _classes;
+    return output;
   }
 
   return DomComponent(
