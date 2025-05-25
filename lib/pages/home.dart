@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:jaspr/jaspr.dart';
+import 'package:portfolio/components/carousel.dart';
+import 'package:portfolio/components/carousel_item.dart';
 
 class Home extends StatefulComponent {
   final String selectedItemId;
@@ -226,16 +228,16 @@ class _HomeState extends State<Home> {
                   [text('FLUTTER APP')])
             ]),
         div(classes: 'flex justify-center', [
-          div(
+          Carousel(
               classes:
-                  'my-2 carousel overflow-y-auto overflow-x-hidden touch-pan-y rounded-sm w-100 duration-4000 ease-in-out $initialOpacity',
-              [
-                div(classes: 'carousel-item w-full', id: 'i1', [
-                  div(
-                    classes: 'card',
-                    [
-                      img(classes: 'w-full', src: '/assets/images/ink.jpeg'),
-                      div(classes: 'card-body', [
+                  'my-2 overflow-y-auto overflow-x-hidden touch-pan-y rounded-sm w-100 duration-4000 ease-in-out $initialOpacity',
+              carouselItems: [
+                CarouselItem(classes: 'w-full', id: 'i1', [
+                  div(classes: 'card', [
+                    img(classes: 'w-full', src: '/assets/images/ink.jpeg'),
+                    div(
+                      classes: 'card-body',
+                      [
                         h2(classes: 'card-title text-neutral-400 justify-end', [
                           a(href: 'https://github.com/dazemc/ink_manager', [
                             u([
@@ -281,11 +283,11 @@ class _HomeState extends State<Home> {
                               ]),
                           text(' front-end')
                         ])
-                      ])
-                    ],
-                  )
+                      ],
+                    )
+                  ]),
                 ]),
-                div(classes: 'carousel-item w-full', id: 'i2', [
+                CarouselItem(classes: 'w-full', id: 'i2', [
                   a(
                       href: 'https://github.com/dazemc/pi7600',
                       target: Target.blank,
@@ -293,8 +295,8 @@ class _HomeState extends State<Home> {
                         img(
                             classes: 'w-full',
                             src: '/assets/images/pi7600.jpeg')
-                      ]),
-                ])
+                      ])
+                ]),
               ]),
         ]),
       ],
