@@ -6,6 +6,8 @@ import 'package:portfolio/components/card_body.dart';
 import 'package:portfolio/components/card_title.dart';
 import 'package:portfolio/components/carousel.dart';
 import 'package:portfolio/components/carousel_item.dart';
+import 'package:portfolio/components/divider.dart';
+import 'package:portfolio/components/mockup_code.dart';
 
 class Home extends StatefulComponent {
   final String selectedItemId;
@@ -114,24 +116,15 @@ class _HomeState extends State<Home> {
     }
   }
 
-  List<String> get mockCodeClasses => [
-        'mockup-code',
-        'shadow-md',
-        'm-4',
-        'h-32',
-        'duration-1000',
-        'ease-in-out',
-        initialOpacity,
-      ];
-
   @override
   Iterable<Component> build(BuildContext context) sync* {
     yield div(
       classes:
           "flex flex-col justify-start container mx-auto px-2 min-h-screen bg-base-100 transition-all",
       [
-        div(
-          classes: mockCodeClasses.join(' '),
+        MockupCode(
+          classes:
+              'shadow-md m-4 h-32 duration-1000 ease-in-out $initialOpacity',
           [
             pre(
               attributes: {'data-prefix': r'$'},
@@ -207,9 +200,12 @@ class _HomeState extends State<Home> {
                 ])
           ],
         ),
-        div(
+        Divider(
+            direction: DividerDirection.vertical,
+            color: DividerColor.accent,
+            placement: DividerPlacement.center,
             classes:
-                'px-12 divider divider-accent duration-4000 ease-in-out animate-stretch $initialOpacity',
+                'px-12 duration-4000 ease-in-out animate-stretch $initialOpacity',
             [
               div(classes: 'text-current animate-fall', [
                 em([text('Projects')])
