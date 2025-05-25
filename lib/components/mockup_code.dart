@@ -1,17 +1,28 @@
 import 'package:jaspr/jaspr.dart';
 
-class MockupCode extends StatelessComponent {
-  final String? classes;
-  final List<Component>? children;
-  const MockupCode(this.children, {this.classes, super.key});
+String nullCheckDefaults(String? classes, String defaultClasses) {
+  return (classes != null) ? '$defaultClasses $classes' : defaultClasses;
+}
 
-  String nullCheckDefaults(String? classes, String defaultClasses) {
-    return (classes != null) ? '$defaultClasses $classes' : defaultClasses;
-  }
-
-  @override
-  Iterable<Component> build(BuildContext context) sync* {
-    String _classes = nullCheckDefaults(classes, 'mockup-code');
-    yield div(classes: _classes, children ?? []);
-  }
+Component mockupCode(
+  final List<Component>? children, {
+  final String? classes,
+  final String? id,
+  final Key? key,
+  final Styles? styles,
+  final Map<String, String>? attributes,
+  final Map<String, EventCallback>? events,
+}) {
+  String _classes = nullCheckDefaults(classes, 'mockup-code');
+  print(_classes);
+  return DomComponent(
+    tag: 'div',
+    classes: _classes,
+    styles: styles,
+    attributes: attributes,
+    id: id,
+    key: key,
+    events: events,
+    children: children,
+  );
 }

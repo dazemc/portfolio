@@ -122,7 +122,7 @@ class _HomeState extends State<Home> {
       classes:
           "flex flex-col justify-start container mx-auto px-2 min-h-screen bg-base-100 transition-all",
       [
-        MockupCode(
+        mockupCode(
           classes:
               'shadow-md m-4 h-32 duration-1000 ease-in-out $initialOpacity',
           [
