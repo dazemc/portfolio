@@ -8,7 +8,8 @@ enum ButtonColor {
   info('btn-info'),
   success('btn-success'),
   warning('btn-warning'),
-  error('btn-error');
+  error('btn-error'),
+  none('');
 
   final String value;
   const ButtonColor(this.value);
@@ -21,7 +22,8 @@ enum ButtonStyle {
   dash('btn-dash'),
   soft('btn-soft'),
   ghost('btn-ghost'),
-  link('btn-link');
+  link('btn-link'),
+  none('');
 
   final String value;
   const ButtonStyle(this.value);
@@ -68,7 +70,7 @@ Component button(
   final List<Component>? children, {
   final String? classes,
   final ButtonColor? color,
-  final ButtonStyle? style,
+  final List<ButtonStyle>? styles,
   final ButtonSize? size,
   final ButtonBehavior? behavior,
   final ButtonModifier? modifier,
@@ -81,7 +83,7 @@ Component button(
     List<String> output = [
       'btn',
       if (color != null) color.toString(),
-      if (style != null) style.toString(),
+      if (styles != null) ...styles.map((style) => style.toString()),
       if (size != null) size.toString(),
       if (behavior != null) behavior.toString(),
       if (modifier != null) modifier.toString(),

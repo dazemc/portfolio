@@ -1,4 +1,4 @@
-import 'package:jaspr/jaspr.dart';
+import 'package:jaspr/jaspr.dart' hide button;
 import 'package:jaspr_router/jaspr_router.dart';
 import 'package:logging/logging.dart';
 import 'dart:math';
@@ -6,6 +6,7 @@ import 'dart:math';
 import 'package:jaspr_lucide/jaspr_lucide.dart' as lucide;
 import '../constants/theme.dart';
 import 'theme_controller.dart';
+import 'button.dart';
 
 final log = Logger('/components/header');
 final random = Random();
@@ -45,23 +46,37 @@ class _HeaderState extends State<Header> {
           div(classes: 'flex flex-row flex-1', [
             ul([
               Link(
-                classes:
-                    'mx-1 btn btn-sm btn-primary ${isRoot ? 'btn-active animate-pulse' : 'btn-dash'}',
-                to: '/',
-                child: lucide.house(
-                  height: Unit.pixels(30),
-                  width: Unit.pixels(30),
-                ),
-              ),
+                  classes: 'mx-1 ${(isRoot) ? 'animate-pulse' : ''}',
+                  to: '/',
+                  child: button(
+                      color: (isRoot) ? ButtonColor.primary : ButtonColor.none,
+                      styles:
+                          (isRoot) ? [ButtonStyle.none] : [ButtonStyle.dash],
+                      size: ButtonSize.sm,
+                      [
+                        lucide.house(
+                          height: Unit.pixels(30),
+                          width: Unit.pixels(30),
+                        ),
+                      ])),
             ]),
             ul([
               div([
                 Link(
-                    classes:
-                        'mx-1 btn btn-sm btn-primary ${!isRoot ? 'animate-pulse' : 'btn-dash'}',
+                    classes: 'mx-1 ${!isRoot ? 'animate-pulse' : ''}',
                     to: '/about',
-                    child: lucide.info(
-                        height: Unit.pixels(30), width: Unit.pixels(30)))
+                    child: button(
+                        color:
+                            (!isRoot) ? ButtonColor.primary : ButtonColor.none,
+                        styles:
+                            (!isRoot) ? [ButtonStyle.none] : [ButtonStyle.dash],
+                        size: ButtonSize.sm,
+                        [
+                          lucide.info(
+                            height: Unit.pixels(30),
+                            width: Unit.pixels(30),
+                          ),
+                        ])),
               ]),
             ]),
           ]),
