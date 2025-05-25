@@ -296,14 +296,74 @@ class _HomeState extends State<Home> {
                   ),
                 ]),
                 CarouselItem(classes: 'w-full', id: 'i2', [
-                  a(
-                      href: 'https://github.com/dazemc/pi7600',
-                      target: Target.blank,
+                  Card(
+                    [
+                      a(
+                          href: 'https://github.com/dazemc/pi7600',
+                          target: Target.blank,
+                          [
+                            img(
+                                classes: 'w-full',
+                                src: '/assets/images/pi7600.jpeg')
+                          ]),
+                    ],
+                    cardBody: CardBody(
                       [
-                        img(
-                            classes: 'w-full',
-                            src: '/assets/images/pi7600.jpeg')
-                      ])
+                        p(classes: 'justify-start', [
+                          text(
+                              'Developed a Python and Flutter project using FastAPI to manage a 4g LTE SIM, including a '),
+                          a(
+                              href: 'https://github.com/dazemc/pi7600-lib',
+                              target: Target.blank,
+                              [
+                                div(
+                                    classes: 'btn btn-dash btn-primary btn-xs',
+                                    [
+                                      text('custom library'),
+                                    ])
+                              ]),
+                          text(' '),
+                          a(
+                              href: 'https://github.com/dazemc/pi7600',
+                              target: Target.blank,
+                              [
+                                div(
+                                    classes: 'btn btn-dash btn-primary btn-xs',
+                                    [
+                                      text('API'),
+                                    ])
+                              ]),
+                          text(' and a '),
+                          a(
+                              classes: 'text-',
+                              href: 'https://github.com/dazemc/pi7600-flutter',
+                              target: Target.blank,
+                              [
+                                div(
+                                    classes: 'btn btn-dash btn-primary btn-xs',
+                                    [
+                                      text('Flutter application'),
+                                    ])
+                              ]),
+                          text(' front-end')
+                        ])
+                      ],
+                      cardTitle: CardTitle(
+                        header: 2,
+                        classes: 'text-neutral-400 justify-end',
+                        [
+                          a(
+                              href: 'https://github.com/dazemc/pi7600-flutter',
+                              target: Target.blank,
+                              [
+                                u([
+                                  text('Flutter app for 4g LTE module'),
+                                ]),
+                              ])
+                        ],
+                      ),
+                    ),
+                  ),
                 ]),
               ]),
         ]),

@@ -5,7 +5,7 @@ class About extends StatelessComponent {
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    yield section([
+    yield section(classes: 'mx-1', [
       div([text('About')])
     ]);
   }
