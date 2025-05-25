@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:jaspr/jaspr.dart';
+import 'package:portfolio/components/card.dart';
+import 'package:portfolio/components/card_body.dart';
+import 'package:portfolio/components/card_title.dart';
 import 'package:portfolio/components/carousel.dart';
 import 'package:portfolio/components/carousel_item.dart';
 
@@ -233,18 +236,12 @@ class _HomeState extends State<Home> {
                   'my-2 overflow-y-auto overflow-x-hidden touch-pan-y rounded-sm w-100 duration-4000 ease-in-out $initialOpacity',
               carouselItems: [
                 CarouselItem(classes: 'w-full', id: 'i1', [
-                  div(classes: 'card', [
-                    img(classes: 'w-full', src: '/assets/images/ink.jpeg'),
-                    div(
-                      classes: 'card-body',
+                  Card(
+                    [
+                      img(classes: 'w-full', src: '/assets/images/ink.jpeg'),
+                    ],
+                    cardBody: CardBody(
                       [
-                        h2(classes: 'card-title text-neutral-400 justify-end', [
-                          a(href: 'https://github.com/dazemc/ink_manager', [
-                            u([
-                              text('RESTful API for E-Paper device'),
-                            ]),
-                          ])
-                        ]),
                         p(classes: 'justify-start', [
                           text(
                               'Developed a Python-based project using FastAPI to manage an E-Paper device, including a '),
@@ -284,8 +281,19 @@ class _HomeState extends State<Home> {
                           text(' front-end')
                         ])
                       ],
-                    )
-                  ]),
+                      cardTitle: CardTitle(
+                        header: 2,
+                        classes: 'text-neutral-400 justify-end',
+                        [
+                          a(href: 'https://github.com/dazemc/ink_manager', [
+                            u([
+                              text('RESTful API for E-Paper device'),
+                            ]),
+                          ])
+                        ],
+                      ),
+                    ),
+                  ),
                 ]),
                 CarouselItem(classes: 'w-full', id: 'i2', [
                   a(
