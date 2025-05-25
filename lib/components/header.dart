@@ -48,7 +48,7 @@ class _HeaderState extends State<Header> {
                 classes:
                     'mx-1 btn btn-sm btn-primary ${isRoot ? 'btn-active animate-pulse' : 'btn-dash'}',
                 to: '/',
-                child: lucide.House(
+                child: lucide.house(
                   height: Unit.pixels(30),
                   width: Unit.pixels(30),
                 ),
@@ -60,14 +60,14 @@ class _HeaderState extends State<Header> {
                     classes:
                         'mx-1 btn btn-sm btn-primary ${!isRoot ? 'animate-pulse' : 'btn-dash'}',
                     to: '/about',
-                    child: lucide.Info(
+                    child: lucide.info(
                         height: Unit.pixels(30), width: Unit.pixels(30)))
               ]),
             ]),
           ]),
           ThemeController(
             themeName: defaultTheme,
-            dropdownIcon: lucide.ChevronDown(classes: 'animate-wiggle'),
+            dropdownIcon: lucide.chevronDown(classes: 'animate-wiggle'),
             randomThemeClasses:
                 'w-full btn btn-sm btn-block btn-primary justify-start animate-bounce',
           )

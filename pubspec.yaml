@@ -9,7 +9,7 @@ dependencies:
   jaspr: ^0.18.2
   jaspr_content: ^0.1.0
   jaspr_daisyui: ^0.1.0
-  jaspr_lucide: ^0.3.0
+  jaspr_lucide: ^0.4.0
   jaspr_router: ^0.6.4
   logging: ^1.3.0
   web: ^1.1.0
