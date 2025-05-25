@@ -33,7 +33,8 @@ enum ButtonStyle {
 
 enum ButtonBehavior {
   active('btn-active'),
-  disabled('btn-disabled');
+  disabled('btn-disabled'),
+  none('');
 
   final String value;
   const ButtonBehavior(this.value);
@@ -46,7 +47,8 @@ enum ButtonSize {
   sm('btn-sm'),
   md('btn-md'),
   lg('btn-lg'),
-  xl('btn-xl');
+  xl('btn-xl'),
+  none('');
 
   final String value;
   const ButtonSize(this.value);
@@ -58,7 +60,8 @@ enum ButtonModifier {
   wide('btn-wide'),
   block('btn-block'),
   square('btn-square'),
-  circle('btn-circle');
+  circle('btn-circle'),
+  none('');
 
   final String value;
   const ButtonModifier(this.value);
@@ -70,10 +73,11 @@ Component button(
   final List<Component>? children, {
   final String? classes,
   final ButtonColor? color,
-  final List<ButtonStyle>? styles,
+  final List<ButtonStyle>? buttonStyle,
   final ButtonSize? size,
   final ButtonBehavior? behavior,
   final ButtonModifier? modifier,
+  final Styles? styles,
   final Key? key,
   final String? id,
   final Map<String, String>? attributes,
@@ -83,7 +87,7 @@ Component button(
     List<String> output = [
       'btn',
       if (color != null) color.toString(),
-      if (styles != null) ...styles.map((style) => style.toString()),
+      if (buttonStyle != null) ...buttonStyle.map((style) => style.toString()),
       if (size != null) size.toString(),
       if (behavior != null) behavior.toString(),
       if (modifier != null) modifier.toString(),
@@ -94,10 +98,11 @@ Component button(
   }
 
   return DomComponent(
-    tag: 'span',
+    tag: 'div',
     classes: getClasses(),
     key: key,
     id: id,
+    styles: styles,
     children: children,
     attributes: attributes,
     events: events,

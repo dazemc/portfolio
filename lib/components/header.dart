@@ -41,8 +41,8 @@ class _HeaderState extends State<Header> {
     bool isRoot = isPathRoot(activePath);
     print('active path: $activePath');
     yield header([
-      nav(classes: 'm-4', [
-        div(classes: 'navbar bg-neutral shadow-sm rounded-box', [
+      div(classes: 'm-4', [
+        nav(classes: 'navbar bg-neutral shadow-sm rounded-box', [
           div(classes: 'flex flex-row flex-1', [
             ul([
               Link(
