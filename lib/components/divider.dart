@@ -37,33 +37,44 @@ enum DividerColor {
   String toString() => value;
 }
 
-class Divider extends StatelessComponent {
-  final String? classes;
-  final List<Component>? children;
-  final DividerDirection? direction;
-  final DividerPlacement? placement;
-  final DividerColor? color;
-  const Divider(this.children,
-      {this.classes, this.direction, this.placement, this.color, super.key});
+Component Divider(
+  final List<Component>? children, {
+  final Component? child,
+  final String? classes,
+  final String? id,
+  final Styles? styles,
+  final DividerDirection? direction,
+  final DividerPlacement? placement,
+  final DividerColor? color,
+  final Map<String, String>? attributes,
+  final Map<String, EventCallback>? events,
+}) {
+  String nullEnumCheck(dynamic attr) => attr != null ? attr.toString() : '';
 
-  String nullAttr(dynamic attr) => attr != null ? attr.toString() : '';
-
-  String getDirection() => nullAttr(direction);
-  String getPlacement() => nullAttr(placement);
-  String getColor() => nullAttr(color);
+  String getDirection() => nullEnumCheck(direction);
+  String getPlacement() => nullEnumCheck(placement);
+  String getColor() => nullEnumCheck(color);
 
   String nullCheckDefaults(String? classes, String defaultClasses) {
     return (classes != null) ? '$defaultClasses $classes' : defaultClasses;
   }
 
-  @override
-  Iterable<Component> build(BuildContext context) sync* {
+  String getClasses() {
     String _classes = nullCheckDefaults(classes, 'divider');
     _classes += getDirection();
     _classes += getPlacement();
     _classes += getColor();
 
-    print(_classes);
-    yield div(classes: _classes, children ?? []);
+    return _classes;
   }
+
+  return DomComponent(
+      tag: 'div',
+      classes: getClasses(),
+      id: id,
+      styles: styles,
+      attributes: attributes,
+      events: events,
+      child: child,
+      children: children);
 }
