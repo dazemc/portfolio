@@ -93,7 +93,6 @@ Component button(
       if (modifier != null) modifier.toString(),
       classes ?? '',
     ];
-    print(output.join(' '));
     return output.join(' ');
   }
 

@@ -41,7 +41,7 @@ class _HeaderState extends State<Header> {
     bool isRoot = isPathRoot(activePath);
     print('active path: $activePath');
     yield header([
-      div(classes: 'm-4', [
+      div(classes: 'm-4 lg:mx-100', [
         nav(classes: 'navbar bg-neutral shadow-sm rounded-box', [
           div(classes: 'flex flex-row flex-1', [
             ul([
@@ -50,11 +50,12 @@ class _HeaderState extends State<Header> {
                   to: '/',
                   child: button(
                       color: (isRoot) ? ButtonColor.primary : ButtonColor.none,
-                      styles:
+                      buttonStyle:
                           (isRoot) ? [ButtonStyle.none] : [ButtonStyle.dash],
                       size: ButtonSize.sm,
                       [
                         lucide.house(
+                          classes: 'py-0.5',
                           height: Unit.pixels(30),
                           width: Unit.pixels(30),
                         ),
@@ -68,11 +69,12 @@ class _HeaderState extends State<Header> {
                     child: button(
                         color:
                             (!isRoot) ? ButtonColor.primary : ButtonColor.none,
-                        styles:
+                        buttonStyle:
                             (!isRoot) ? [ButtonStyle.none] : [ButtonStyle.dash],
                         size: ButtonSize.sm,
                         [
                           lucide.info(
+                            classes: 'py-0.5',
                             height: Unit.pixels(30),
                             width: Unit.pixels(30),
                           ),

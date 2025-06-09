@@ -23,7 +23,7 @@ import 'package:portfolio/app.dart' as prefix0;
 ///   runApp(...);
 /// }
 /// ```
-final defaultJasprOptions = JasprOptions(
+JasprOptions get defaultJasprOptions => JasprOptions(
   clients: {prefix0.App: ClientTarget<prefix0.App>('app')},
   styles: () => [],
 );

@@ -12,7 +12,6 @@ enum DividerDirection {
 
 enum DividerPlacement {
   start(' divider-start'),
-  center(''),
   end(' divider-end');
 
   final String value;

@@ -77,14 +77,14 @@ class _ThemeControllerState extends State<ThemeController> {
     _currentTheme = super.component.themeName ?? 'dark';
     _randomThemeClasses = super.component.randomThemeClasses ??
         super.component.themeControllerClasses ??
-        'w-full btn btn-sm btn-block btn-ghost justify-start';
+        'w-full btn btn-sm btn-block btn-ghost justify-start lg:text-[18px]';
     _themeControllerClasses = super.component.themeControllerClasses ??
         'w-full btn btn-sm btn-block btn-ghost justify-start';
     _dropdownIcon = super.component.dropdownIcon ?? span([]);
-    _dropdownClasses =
-        super.component.dropdownClasses ?? ' btn m-1 w-25 hover:opacity-50';
+    _dropdownClasses = super.component.dropdownClasses ??
+        ' btn m-1 w-25 hover:opacity-50 lg:text-[18px]';
     _dropdownContentClasses = super.component.dropdownContentClasses ??
-        'bg-base-300 rounded-box z-1 p-2 shadow-2xl max-h-60 overflow-y-auto';
+        'bg-base-300 rounded-box z-1 p-2 shadow-2xl max-h-60 overflow-y-auto lg:text-[18px]';
   }
 
   void changeThemeName(String name) {
