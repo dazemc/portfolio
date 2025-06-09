@@ -39,56 +39,62 @@ class _HeaderState extends State<Header> {
   Iterable<Component> build(BuildContext context) sync* {
     var activePath = RouteState.of(context).location;
     bool isRoot = isPathRoot(activePath);
-    print('active path: $activePath');
     yield header([
       div(classes: 'm-4 lg:mx-100', [
-        nav(classes: 'navbar bg-neutral shadow-sm rounded-box', [
-          div(classes: 'flex flex-row flex-1', [
-            ul([
-              Link(
-                  classes: 'mx-1 ${(isRoot) ? 'animate-pulse' : ''}',
-                  to: '/',
-                  child: button(
-                      color: (isRoot) ? ButtonColor.primary : ButtonColor.none,
-                      buttonStyle:
-                          (isRoot) ? [ButtonStyle.none] : [ButtonStyle.dash],
-                      size: ButtonSize.sm,
-                      [
-                        lucide.house(
-                          classes: 'py-0.5',
-                          height: Unit.pixels(30),
-                          width: Unit.pixels(30),
-                        ),
-                      ])),
-            ]),
-            ul([
-              div([
-                Link(
-                    classes: 'mx-1 ${!isRoot ? 'animate-pulse' : ''}',
-                    to: '/about',
-                    child: button(
-                        color:
-                            (!isRoot) ? ButtonColor.primary : ButtonColor.none,
-                        buttonStyle:
-                            (!isRoot) ? [ButtonStyle.none] : [ButtonStyle.dash],
-                        size: ButtonSize.sm,
-                        [
-                          lucide.info(
-                            classes: 'py-0.5',
-                            height: Unit.pixels(30),
-                            width: Unit.pixels(30),
-                          ),
-                        ])),
+        nav(
+            classes:
+                'navbar bg-neutral shadow-sm rounded-box transition-all duration-1000 ease-in-out',
+            [
+              div(classes: 'flex flex-row flex-1', [
+                ul([
+                  Link(
+                      classes: 'mx-1 ${(isRoot) ? 'animate-pulse' : ''}',
+                      to: '/',
+                      child: button(
+                          color:
+                              (isRoot) ? ButtonColor.primary : ButtonColor.none,
+                          buttonStyle: (isRoot)
+                              ? [ButtonStyle.none]
+                              : [ButtonStyle.dash],
+                          size: ButtonSize.sm,
+                          [
+                            lucide.house(
+                              classes: 'py-0.5',
+                              height: Unit.pixels(30),
+                              width: Unit.pixels(30),
+                            ),
+                          ])),
+                ]),
+                ul([
+                  div([
+                    Link(
+                        classes: 'mx-1 ${!isRoot ? 'animate-pulse' : ''}',
+                        to: '/about',
+                        child: button(
+                            color: (!isRoot)
+                                ? ButtonColor.primary
+                                : ButtonColor.none,
+                            buttonStyle: (!isRoot)
+                                ? [ButtonStyle.none]
+                                : [ButtonStyle.dash],
+                            size: ButtonSize.sm,
+                            [
+                              lucide.info(
+                                classes: 'py-0.5',
+                                height: Unit.pixels(30),
+                                width: Unit.pixels(30),
+                              ),
+                            ])),
+                  ]),
+                ]),
               ]),
+              ThemeController(
+                themeName: defaultTheme,
+                dropdownIcon: lucide.chevronDown(classes: 'animate-wiggle'),
+                randomThemeClasses:
+                    'w-full btn btn-sm btn-block btn-primary justify-start animate-bounce',
+              )
             ]),
-          ]),
-          ThemeController(
-            themeName: defaultTheme,
-            dropdownIcon: lucide.chevronDown(classes: 'animate-wiggle'),
-            randomThemeClasses:
-                'w-full btn btn-sm btn-block btn-primary justify-start animate-bounce',
-          )
-        ]),
       ]),
     ]);
   }

@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:jaspr/jaspr.dart' hide Btn;
+import 'package:jaspr/jaspr.dart';
 import 'package:jaspr_daisyui_components/jaspr_daisyui_components.dart';
 
 class Home extends StatefulComponent {
@@ -112,94 +112,92 @@ class _HomeState extends State<Home> {
 
   @override
   Iterable<Component> build(BuildContext context) sync* {
-    yield div(
-        classes: "flex container w-max px-2 bg-base-100 transition-all mx-auto",
+    yield div(classes: "flex container w-max mx-auto", [
+      MockupCode(
+        classes:
+            'shadow-md m-4 h-32 w-86 lg:h-48 lg:w-128 bg-blend-darken duration-1000 ease-in-out $initialOpacity',
         [
-          MockupCode(
-            classes:
-                'shadow-md m-4 h-32 w-86 lg:h-48 lg:w-128 duration-1000 ease-in-out $initialOpacity',
+          pre(
+            classes: 'lg:text-[24px]',
+            attributes: {'data-prefix': r'$'},
             [
-              pre(
-                classes: 'lg:text-[24px]',
-                attributes: {'data-prefix': r'$'},
-                [
-                  code([
+              code([
+                span(
+                  [
+                    text(mockCodeScriptTyper),
                     span(
-                      [
-                        text(mockCodeScriptTyper),
-                        span(
-                          classes: 'animate-blink $mockCodeScriptOpacity',
-                          styles: Styles(
-                            border: Border.only(
-                              right: BorderSide(
-                                width: Unit.pixels(2),
-                                color: const Color.named('currentColor'),
-                              ),
-                            ),
+                      classes: 'animate-blink $mockCodeScriptOpacity',
+                      styles: Styles(
+                        border: Border.only(
+                          right: BorderSide(
+                            width: Unit.pixels(2),
+                            color: const Color.named('currentColor'),
                           ),
-                          [],
                         ),
-                      ],
+                      ),
+                      [],
                     ),
-                  ]),
-                ],
-              ),
-              pre(
-                  classes:
-                      'lg:text-[24px] text-warning ${!isMockCodeScriptDone ? 'hidden' : ''}',
-                  attributes: {
-                    'data-prefix': '>'
-                  },
-                  [
-                    code([
-                      span(
-                        [
-                          text('running$mockCodeRunning'),
-                          span(
-                            classes:
-                                // TODO: loop '...' for a few seconds
-                                'animate-blink $mockCodeScriptOpacity',
-                            [],
-                          ),
-                        ],
-                      )
-                    ])
-                  ]),
-              pre(
-                  classes:
-                      'lg:text-[24px] text-success ${!isMockCodeRunningDone ? 'hidden' : ''}',
-                  attributes: {
-                    'data-prefix': '>'
-                  },
-                  [
-                    code([
-                      span(
-                        [
-                          text(mockCodeGreetingTyper),
-                          span(
-                            classes: 'animate-blink $mockCodeGreetingOpacity',
-                            styles: Styles(
-                              border: Border.only(
-                                right: BorderSide(
-                                  width: Unit.pixels(2),
-                                  color: const Color.named('currentColor'),
-                                ),
-                              ),
-                            ),
-                            [],
-                          ),
-                        ],
-                      )
-                    ])
-                  ])
+                  ],
+                ),
+              ]),
             ],
-          )
-        ]);
+          ),
+          pre(
+              classes:
+                  'lg:text-[24px] text-warning ${!isMockCodeScriptDone ? 'hidden' : ''}',
+              attributes: {
+                'data-prefix': '>'
+              },
+              [
+                code([
+                  span(
+                    [
+                      text('running$mockCodeRunning'),
+                      span(
+                        classes:
+                            // TODO: loop '...' for a few seconds
+                            'animate-blink $mockCodeScriptOpacity',
+                        [],
+                      ),
+                    ],
+                  )
+                ])
+              ]),
+          pre(
+              classes:
+                  'lg:text-[24px] text-success ${!isMockCodeRunningDone ? 'hidden' : ''}',
+              attributes: {
+                'data-prefix': '>'
+              },
+              [
+                code([
+                  span(
+                    [
+                      text(mockCodeGreetingTyper),
+                      span(
+                        classes: 'animate-blink $mockCodeGreetingOpacity',
+                        styles: Styles(
+                          border: Border.only(
+                            right: BorderSide(
+                              width: Unit.pixels(2),
+                              color: const Color.named('currentColor'),
+                            ),
+                          ),
+                        ),
+                        [],
+                      ),
+                    ],
+                  )
+                ])
+              ])
+        ],
+      )
+    ]);
     yield Divider(
         direction: DividerDirection.vertical,
         color: DividerColor.accent,
         classes:
-            'mx-6 lg:mx-106 duration-4000 ease-in-out animate-stretch $initialOpacity',
+            'mx-6 lg:mx-106 duration-2000 ease-in-out animate-stretch $initialOpacity',
         [
           div(classes: 'text-current animate-fall', [
             em([text('Projects')])
@@ -207,7 +205,7 @@ class _HomeState extends State<Home> {
         ]);
     yield div(
         classes:
-            'flex justify-center gap-2 mx-auto duration-4000 ease-in-out $initialOpacity',
+            'flex justify-center gap-2 mx-auto duration-3000 ease-in-out $initialOpacity',
         [
           a(
             classes: '${currentId == 'i1' ? 'animate-bounce' : 'opacity-50'}',
@@ -229,16 +227,15 @@ class _HomeState extends State<Home> {
                     [text('FLUTTER APP')])
               ])
         ]);
-    yield div(classes: 'flex justify-center mx-4', [
-      Carousel(
-          classes:
-              'm-4 overflow-y-auto overflow-x-hidden touch-pan-y rounded-sm w-full duration-4000 ease-in-out $initialOpacity',
-          [
-            CarouselItem(classes: 'w-full m-4', id: 'i1', [
-              Card(
-                  classes:
-                      'bg-base-100 justify-center shadow-xl mx-4 lg:mx-100',
-                  [
+    yield div(
+        classes: 'flex flex-col items-center mx-4 duration-1000 ease-in-out',
+        [
+          Carousel(
+              classes:
+                  'm-4 overflow-y-hidden overflow-x-hidden touch-pan-y rounded-sm w-full duration-4000 ease-in-out $initialOpacity',
+              [
+                CarouselItem(classes: 'w-full m-4', id: 'i1', [
+                  Card(classes: 'bg-base-100 shadow-xl mx-4 lg:mx-100 ', [
                     img(classes: 'rounded-xl', src: '/assets/images/ink.jpeg'),
                     CardBody(
                       classes: 'bg-base-120',
@@ -297,83 +294,84 @@ class _HomeState extends State<Home> {
                       ],
                     ),
                   ]),
-            ]),
-            CarouselItem(classes: 'w-full m-4', id: 'i2', [
-              Card(
-                  classes:
-                      'justify-center bg-base-120 mx-4 shadow-xl lg:mx-100',
-                  [
-                    a(
-                        href: 'https://github.com/dazemc/pi7600',
-                        target: Target.blank,
-                        [
-                          img(
-                              classes: 'rounded-xl',
-                              src: '/assets/images/pi7600.jpeg')
-                        ]),
-                    CardBody(
-                      classes: 'bg-base-120',
+                ]),
+                CarouselItem(classes: 'w-full m-4', id: 'i2', [
+                  Card(
+                      classes:
+                          'justify-center bg-base-120 mx-4 shadow-xl lg:mx-100',
                       [
-                        CardTitle(
-                          classes: 'text-neutral-400 justify-end',
+                        a(
+                            href: 'https://github.com/dazemc/pi7600',
+                            target: Target.blank,
+                            [
+                              img(
+                                  classes: 'rounded-xl',
+                                  src: '/assets/images/pi7600.jpeg')
+                            ]),
+                        CardBody(
+                          classes: 'bg-base-120',
                           [
-                            a(
-                                href:
-                                    'https://github.com/dazemc/pi7600-flutter',
-                                target: Target.blank,
-                                [
-                                  u(classes: 'lg:text-[36px]', [
-                                    text('Flutter app for 4g LTE module'),
+                            CardTitle(
+                              classes: 'text-neutral-400 justify-end',
+                              [
+                                a(
+                                    href:
+                                        'https://github.com/dazemc/pi7600-flutter',
+                                    target: Target.blank,
+                                    [
+                                      u(classes: 'lg:text-[36px]', [
+                                        text('Flutter app for 4g LTE module'),
+                                      ]),
+                                    ])
+                              ],
+                            ),
+                            p(classes: 'justify-start lg:text-[24px]', [
+                              text(
+                                  'Developed a Python and Flutter project using FastAPI to manage a 4g LTE SIM, including a '),
+                              a(
+                                  href: 'https://github.com/dazemc/pi7600-lib',
+                                  target: Target.blank,
+                                  [
+                                    div(
+                                        classes:
+                                            'btn btn-dash btn-primary btn-xs lg:btn-md',
+                                        [
+                                          text('custom library'),
+                                        ])
                                   ]),
-                                ])
+                              text(' '),
+                              a(
+                                  href: 'https://github.com/dazemc/pi7600',
+                                  target: Target.blank,
+                                  [
+                                    div(
+                                        classes:
+                                            'btn btn-dash btn-primary btn-xs lg:btn-md',
+                                        [
+                                          text('API'),
+                                        ])
+                                  ]),
+                              text(' and a '),
+                              a(
+                                  classes: 'text-',
+                                  href:
+                                      'https://github.com/dazemc/pi7600-flutter',
+                                  target: Target.blank,
+                                  [
+                                    div(
+                                        classes:
+                                            'btn btn-dash btn-primary btn-xs lg:btn-md',
+                                        [
+                                          text('Flutter application'),
+                                        ])
+                                  ]),
+                              text(' front-end')
+                            ])
                           ],
                         ),
-                        p(classes: 'justify-start lg:text-[24px]', [
-                          text(
-                              'Developed a Python and Flutter project using FastAPI to manage a 4g LTE SIM, including a '),
-                          a(
-                              href: 'https://github.com/dazemc/pi7600-lib',
-                              target: Target.blank,
-                              [
-                                div(
-                                    classes:
-                                        'btn btn-dash btn-primary btn-xs lg:btn-md',
-                                    [
-                                      text('custom library'),
-                                    ])
-                              ]),
-                          text(' '),
-                          a(
-                              href: 'https://github.com/dazemc/pi7600',
-                              target: Target.blank,
-                              [
-                                div(
-                                    classes:
-                                        'btn btn-dash btn-primary btn-xs lg:btn-md',
-                                    [
-                                      text('API'),
-                                    ])
-                              ]),
-                          text(' and a '),
-                          a(
-                              classes: 'text-',
-                              href: 'https://github.com/dazemc/pi7600-flutter',
-                              target: Target.blank,
-                              [
-                                div(
-                                    classes:
-                                        'btn btn-dash btn-primary btn-xs lg:btn-md',
-                                    [
-                                      text('Flutter application'),
-                                    ])
-                              ]),
-                          text(' front-end')
-                        ])
-                      ],
-                    ),
-                  ]),
-            ])
-          ])
-    ]);
+                      ]),
+                ])
+              ])
+        ]);
   }
 }

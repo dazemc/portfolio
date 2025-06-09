@@ -77,14 +77,14 @@ class _ThemeControllerState extends State<ThemeController> {
     _currentTheme = super.component.themeName ?? 'dark';
     _randomThemeClasses = super.component.randomThemeClasses ??
         super.component.themeControllerClasses ??
-        'w-full btn btn-sm btn-block btn-ghost justify-start lg:text-[18px]';
+        'w-full btn btn-sm btn-block btn-ghost justify-start';
     _themeControllerClasses = super.component.themeControllerClasses ??
         'w-full btn btn-sm btn-block btn-ghost justify-start';
     _dropdownIcon = super.component.dropdownIcon ?? span([]);
-    _dropdownClasses = super.component.dropdownClasses ??
-        ' btn m-1 w-25 hover:opacity-50 lg:text-[18px]';
+    _dropdownClasses =
+        super.component.dropdownClasses ?? ' btn m-1 w-25 hover:opacity-50';
     _dropdownContentClasses = super.component.dropdownContentClasses ??
-        'bg-base-300 rounded-box z-1 p-2 shadow-2xl max-h-60 overflow-y-auto lg:text-[18px]';
+        'bg-base-300 rounded-box z-1 p-2 shadow-2xl max-h-60 overflow-y-auto';
   }
 
   void changeThemeName(String name) {
@@ -147,7 +147,10 @@ class _ThemeControllerState extends State<ThemeController> {
   Iterable<Component> build(BuildContext context) sync* {
     List<Component> themeComponents = themeListElements(_availableThemes);
     {
-      yield Document.html(attributes: {'data-theme': _currentTheme});
+      yield Document.html(attributes: {
+        'data-theme': _currentTheme,
+        'class': 'transition-all duration-2000 ease-in-out'
+      });
       yield div(classes: 'dropdown', [
         div(
             attributes: {'tabindex': '0', 'role': 'button'},

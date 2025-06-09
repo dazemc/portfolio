@@ -49,7 +49,7 @@ class AppState extends State<App> {
     // create and return a [List] here.
 
     // Renders a <div class="main"> html element with children.
-    yield div(classes: 'main', [
+    yield div(classes: 'main transition-all duration-1000 ease-in-out', [
       Router(routes: [
         ShellRoute(
           builder: (context, state, child) => Fragment(children: [
@@ -65,7 +65,6 @@ class AppState extends State<App> {
                       kIsWeb && state.location.substring(1).isNotEmpty
                           ? state.location.substring(2)
                           : 'i1';
-                  print(selectedItemId);
                   return Home(selectedItemId: selectedItemId);
                 }),
             Route(
