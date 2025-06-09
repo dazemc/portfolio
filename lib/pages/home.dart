@@ -211,7 +211,8 @@ class _HomeState extends State<Home> {
             classes: '${currentId == 'i1' ? 'animate-bounce' : 'opacity-50'}',
             [
               Btn(
-                  classes: 'lg:text-[18px]',
+                  classes:
+                      'lg:text-[18px] transition-all duration-1000 ease-in-out',
                   size: BtnSize.xs,
                   [text('REST API')])
             ],
@@ -222,7 +223,8 @@ class _HomeState extends State<Home> {
               href: '#i2',
               [
                 Btn(
-                    classes: 'lg:text-[18px]',
+                    classes:
+                        'lg:text-[18px] transition-all duration-1000 ease-in-out',
                     size: BtnSize.xs,
                     [text('FLUTTER APP')])
               ])
@@ -238,7 +240,8 @@ class _HomeState extends State<Home> {
                   Card(classes: 'bg-base-100 shadow-xl mx-4 lg:mx-100 ', [
                     img(classes: 'rounded-xl', src: '/assets/images/ink.jpeg'),
                     CardBody(
-                      classes: 'bg-base-120',
+                      classes:
+                          'bg-base-120 transition-all duration-1000 ease-in-out',
                       [
                         CardTitle(
                           classes: 'text-neutral-400 justify-end',
@@ -259,7 +262,7 @@ class _HomeState extends State<Home> {
                               [
                                 div(
                                     classes:
-                                        'btn btn-dash btn-primary btn-xs lg:btn-md',
+                                        'btn btn-dash btn-primary btn-xs lg:btn-md transition-all duration-1000 ease-in-out',
                                     [
                                       text('custom library'),
                                     ])
@@ -271,7 +274,7 @@ class _HomeState extends State<Home> {
                               [
                                 div(
                                     classes:
-                                        'btn btn-dash btn-primary btn-xs lg:btn-md',
+                                        'btn btn-dash btn-primary btn-xs lg:btn-md transition-all duration-1000 ease-in-out',
                                     [
                                       text('API'),
                                     ])
@@ -284,7 +287,7 @@ class _HomeState extends State<Home> {
                               [
                                 div(
                                     classes:
-                                        'btn btn-dash btn-primary btn-xs lg:btn-md',
+                                        'btn btn-dash btn-primary btn-xs lg:btn-md transition-all duration-1000 ease-in-out',
                                     [
                                       text('Flutter application'),
                                     ])
@@ -309,7 +312,8 @@ class _HomeState extends State<Home> {
                                   src: '/assets/images/pi7600.jpeg')
                             ]),
                         CardBody(
-                          classes: 'bg-base-120',
+                          classes:
+                              'bg-base-120 transition-all duration-1000 ease-in-out',
                           [
                             CardTitle(
                               classes: 'text-neutral-400 justify-end',
@@ -334,7 +338,7 @@ class _HomeState extends State<Home> {
                                   [
                                     div(
                                         classes:
-                                            'btn btn-dash btn-primary btn-xs lg:btn-md',
+                                            'btn btn-dash btn-primary btn-xs lg:btn-md transition-all duration-1000 ease-in-out',
                                         [
                                           text('custom library'),
                                         ])
@@ -346,7 +350,7 @@ class _HomeState extends State<Home> {
                                   [
                                     div(
                                         classes:
-                                            'btn btn-dash btn-primary btn-xs lg:btn-md',
+                                            'btn btn-dash btn-primary btn-xs lg:btn-md transition-all duration-1000 ease-in-out',
                                         [
                                           text('API'),
                                         ])
@@ -360,7 +364,7 @@ class _HomeState extends State<Home> {
                                   [
                                     div(
                                         classes:
-                                            'btn btn-dash btn-primary btn-xs lg:btn-md',
+                                            'btn btn-dash btn-primary btn-xs lg:btn-md transition-all duration-1000 ease-in-out',
                                         [
                                           text('Flutter application'),
                                         ])
