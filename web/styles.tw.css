@@ -49,6 +49,14 @@
   }
 }
 @theme {
+  --animate-fall-far: fall-far 10s ease-in-out 1;
+  @keyframes fall-far {
+  0% {
+    transform: translateY(-3000px);
+  }
+  }
+}
+@theme {
   --animate-stretch: stretch 3s ease-in-out 1;
   @keyframes stretch {
     0% {
