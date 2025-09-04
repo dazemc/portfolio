@@ -83,17 +83,14 @@ class Home extends StatelessComponent {
     yield div(
       [
         input(
-          [],
           classes: 'toggle toggle-primary',
           type: InputType.checkbox,
         ),
         input(
-          [],
           classes: 'toggle toggle-secondary',
           type: InputType.checkbox,
         ),
         input(
-          [],
           classes: 'toggle toggle-accent',
           type: InputType.checkbox,
         ),
@@ -181,7 +178,6 @@ class Home extends StatelessComponent {
       htmlFor: 'my-modal',
     );
     yield input(
-      [],
       classes: 'modal-toggle',
       type: InputType.checkbox,
       id: 'my-modal',

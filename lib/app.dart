@@ -4,6 +4,8 @@ import 'package:jaspr_router/jaspr_router.dart';
 import 'components/header.dart';
 import 'pages/about.dart';
 import 'pages/home.dart';
+import 'package:jaspr_daisyui_components/jaspr_daisyui_components.dart';
+import 'package:jaspr_lucide/jaspr_lucide.dart' as lucide;
 // import 'pages/example.dart';
 
 // The main component of your application.
@@ -74,6 +76,19 @@ class AppState extends State<App> {
           ],
         ),
       ]),
+      Footer(
+          classes: 'transition-all duration-1000 ease-in-out items-center p-4',
+          direction: FooterDirection.horizontal,
+          [
+            aside(classes: 'grid-flow-col items-center', [
+              lucide.Code(),
+              p([text('Copyright © 2025 - All rights reserved')])
+            ]),
+            nav(classes: 'grid-flow-col place-self-center justify-self-end', [
+              a([lucide.Github(classes: 'animate-fall-far -z-10')],
+                  href: 'https://github.com/dazemc', target: Target.blank)
+            ])
+          ])
     ]);
   }
 

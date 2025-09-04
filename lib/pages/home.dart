@@ -132,7 +132,7 @@ class _HomeState extends State<Home> {
                         border: Border.only(
                           right: BorderSide(
                             width: Unit.pixels(2),
-                            color: const Color.named('currentColor'),
+                            color: Color.currentColor,
                           ),
                         ),
                       ),
@@ -181,7 +181,7 @@ class _HomeState extends State<Home> {
                           border: Border.only(
                             right: BorderSide(
                               width: Unit.pixels(2),
-                              color: const Color.named('currentColor'),
+                              color: Color.currentColor,
                             ),
                           ),
                         ),
@@ -377,19 +377,6 @@ class _HomeState extends State<Home> {
                       ]),
                 ])
               ])
-        ]);
-    yield Footer(
-        classes: 'transition-all duration-1000 ease-in-out items-center p-4',
-        direction: FooterDirection.horizontal,
-        [
-          aside(classes: 'grid-flow-col items-center', [
-            lucide.code(),
-            p([text('Copyright © 2025 - All rights reserved')])
-          ]),
-          nav(classes: 'grid-flow-col place-self-center justify-self-end', [
-            a([lucide.github(classes: 'animate-fall-far')],
-                href: 'https://github.com/dazemc', target: Target.blank)
-          ])
         ]);
   }
 }

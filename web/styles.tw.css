@@ -1,10 +1,10 @@
 @import "tailwindcss";
-@plugin "/home/daze/Git/portfolio/web/daisyui.js" {
+@plugin "/home/daze/GitHub/portfolio/web/daisyui.js" {
   themes: all;
 }
 
 /* Optional for custom themes – Docs: https://daisyui.com/docs/themes/#how-to-add-a-new-custom-theme */
-@plugin "/home/daze/Git/portfolio/web/daisyui-theme.js" {
+@plugin "/home/daze/GitHub/portfolio/web/daisyui-theme.js" {
   /* custom theme here */
 }
 @theme {
@@ -49,11 +49,14 @@
   }
 }
 @theme {
-  --animate-fall-far: fall-far 10s ease-in-out 1;
+  --animate-fall-far: fall-far 15s ease-in-out 1;
   @keyframes fall-far {
-  0% {
-    transform: translateY(-3000px);
-  }
+    0% {
+      transform: translateY(-3000px);
+    }
+    95% {
+      transform: rotate(-360deg);
+    }
   }
 }
 @theme {
@@ -67,3 +70,4 @@
     }
   }
 }
+

@@ -58,7 +58,7 @@ class _HeaderState extends State<Header> {
                               : [ButtonStyle.dash],
                           size: ButtonSize.sm,
                           [
-                            lucide.house(
+                            lucide.House(
                               classes: 'py-0.5',
                               height: Unit.pixels(30),
                               width: Unit.pixels(30),
@@ -79,7 +79,7 @@ class _HeaderState extends State<Header> {
                                 : [ButtonStyle.dash],
                             size: ButtonSize.sm,
                             [
-                              lucide.info(
+                              lucide.Info(
                                 classes: 'py-0.5',
                                 height: Unit.pixels(30),
                                 width: Unit.pixels(30),
@@ -90,7 +90,7 @@ class _HeaderState extends State<Header> {
               ]),
               ThemeController(
                 themeName: defaultTheme,
-                dropdownIcon: lucide.chevronDown(classes: 'animate-wiggle'),
+                dropdownIcon: lucide.ChevronDown(classes: 'animate-wiggle'),
                 randomThemeClasses:
                     'w-full btn btn-sm btn-block btn-primary justify-start animate-bounce',
               )

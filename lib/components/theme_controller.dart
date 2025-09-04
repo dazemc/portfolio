@@ -99,21 +99,21 @@ class _ThemeControllerState extends State<ThemeController> {
     _log.info('Random theme chosen: $theme');
     return li([
       input(
-          attributes: {
-            'type': 'radio',
-            'name': 'theme-dropdown',
-            'aria-label': 'random',
-            'value': _currentTheme,
+        attributes: {
+          'type': 'radio',
+          'name': 'theme-dropdown',
+          'aria-label': 'random',
+          'value': _currentTheme,
+        },
+        classes: 'theme-controller ' + _randomThemeClasses,
+        events: {
+          'click': (event) {
+            _log.info('Theme changed: $theme');
+            changeThemeName(theme);
+            randomIdx; // changes theme for the next click
           },
-          classes: 'theme-controller ' + _randomThemeClasses,
-          events: {
-            'click': (event) {
-              _log.info('Theme changed: $theme');
-              changeThemeName(theme);
-              randomIdx; // changes theme for the next click
-            },
-          },
-          [])
+        },
+      )
     ]);
   }
 
@@ -124,20 +124,20 @@ class _ThemeControllerState extends State<ThemeController> {
     for (String theme in themeList) {
       componentList.add(li([
         input(
-            attributes: {
-              'type': 'radio',
-              'name': 'theme-dropdown',
-              'aria-label': theme,
-              'value': theme,
-            },
-            classes: 'theme-controller ' + _themeControllerClasses,
-            events: {
-              'click': (event) {
-                _log.info('Theme changed');
-                changeThemeName(theme);
-              }
-            },
-            [])
+          attributes: {
+            'type': 'radio',
+            'name': 'theme-dropdown',
+            'aria-label': theme,
+            'value': theme,
+          },
+          classes: 'theme-controller ' + _themeControllerClasses,
+          events: {
+            'click': (event) {
+              _log.info('Theme changed');
+              changeThemeName(theme);
+            }
+          },
+        )
       ]));
     }
     return componentList;
